@@ -2,5 +2,5 @@ dotenv>=0.9.9
 fastapi>=0.115.12
 openai>=1.66.3
 pydantic>=2.10.6
-psycopg2
+psycopg2-binary
 uvicorn
