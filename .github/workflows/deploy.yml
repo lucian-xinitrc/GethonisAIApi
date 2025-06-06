@@ -1,0 +1,27 @@
+name: Maintaing Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run commands on remote server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd /home/lucian/gethonis_api
+            git pull
+            cd app/
+            sudo docker stop gethonis-api
+            sudo docker rm gethonis-api
+            sudo docker build -t gethonisapi .
+            sudo docker run -d --restart unless-stopped --name gethonis-api gethonisapi
