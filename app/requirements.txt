@@ -4,3 +4,4 @@ openai>=1.66.3
 pydantic>=2.10.6
 psycopg2-binary
 uvicorn
+markdown
