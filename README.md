@@ -25,7 +25,7 @@ print(bot.get_message(message))
 
 ### Class Example
 
-```python=
+```python
 class Gethonis:
     """
     The python client for API interaction 
