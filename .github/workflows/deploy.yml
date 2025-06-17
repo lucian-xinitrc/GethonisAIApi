@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /home/lucian/gethonis_api
+            cd gethonis_api
             git pull
             cd app/
             sudo docker stop gethonis-api
