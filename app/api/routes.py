@@ -92,8 +92,8 @@ def custom_docs():
 def generatetoken():
     load_dotenv()
     SECRET_KEY = str(os.getenv('SECRETKEY'))
-    db = Authentication().conn
-    cursor = db.cursor()
+    db = Authentication()
+    cursor = db.conn.cursor()
     insert_query = """
         INSERT INTO tokens (token, tries)
         VALUES (%s, %s);
@@ -106,7 +106,7 @@ def generatetoken():
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     data = (token, 0)
     cursor.execute(insert_query, data)
-    db.commit()
+    db.conn.commit()
     return {"token": token}
 
 @router.post("/api/authorisation")
