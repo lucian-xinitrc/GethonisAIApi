@@ -1,4 +1,4 @@
-# Gethonis API
+ # Gethonis API
 
 ## About
 
@@ -8,6 +8,10 @@ A lightweight Python library to interact with the Gethonis API. Gethonis combine
 ## Gethonis Class Arguments
 
 ### Basic Example
+
+```python
+pip install gethonis
+```
 
 ```python
 import gethonis as geth
