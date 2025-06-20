@@ -99,7 +99,6 @@ def generatetoken():
         VALUES (%s, %s);
         """
 
-    
     token = "geth-" + secrets.token_urlsafe(16)
     try:
         data = (token, 0)
