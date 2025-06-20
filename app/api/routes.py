@@ -126,6 +126,10 @@ def custom_docs():
                 display:flex;
                 justify-content: center;
             }}
+
+            .white-text {{
+                color:white;
+            }}
                 </style>
             </head>
             <body>
@@ -139,9 +143,13 @@ def custom_docs():
                     <section class="list white-text">
                         <p>Press on the button to generate a token.</p>
                         <pre id="tokenOutput"></pre>
-                        <button class="Link white-text" onclick="genereazaToken()">Generează Token</button>
                     </section>
                     
+                </section>
+                <section class="main">
+                    <section class="list white-text">
+                        <button class="Link white-text" onclick="genereazaToken()">Generează Token</button>
+                    </section>
                 </section>
                 <script>
                     async function genereazaToken() {{
