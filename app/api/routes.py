@@ -90,7 +90,7 @@ def custom_docs():
                 box-shadow:0 0 50px 0 #0b1210;
             }}
 
-            Link {{
+            .Link {{
                 transition:0.7s;
                 font-weight:bold;
                 text-decoration:none;
@@ -100,7 +100,7 @@ def custom_docs():
                 border-radius:50px;
             }}
 
-            Link:hover {{
+            .Link:hover {{
                 transition:0.7s;
                 font-weight:bold;
                 text-decoration:none;
@@ -111,7 +111,7 @@ def custom_docs():
                 box-shadow:0 0 20px 0 #0b1210;
             }}
 
-            LInk:focus {{
+            .Link:focus {{
                 outline:none;
             }}
                 </style>
