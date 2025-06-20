@@ -27,6 +27,7 @@ def custom_docs():
               background-color:#222222;
               width:100%;
               height:100vh;
+              font-family:Helvetica;
             }}
 
             h1, h2, h3, h4 {{
@@ -117,7 +118,7 @@ def custom_docs():
             <body>
             <header class="App-header">
                 <h1 class="title center-text white-text">Welcome to Gethonis</h1>
-                <section classN="text">
+                <section class="text">
                     <p>Gethonis is an API that combines responses from ChatGPT4 and DeepSeek V3. It analyzes the prompt you gave him and he responds with the best version of your response by generating prompt on ChatGPT4 and DeepSeek, compares both responses and it gives the best version of them.</p>
                 </section>
                 <section class="main">
