@@ -17,4 +17,4 @@ class Authentication():
 		    	api_tokens.execute("UPDATE tokens SET tries = tries + 1 WHERE token = %s", (token,))
 				self.conn.commit()
 		else:
-		    self.auth = False
+			self.auth = False
