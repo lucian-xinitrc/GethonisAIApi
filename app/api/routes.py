@@ -90,16 +90,17 @@ def custom_docs():
                 box-shadow:0 0 50px 0 #0b1210;
             }}
 
-            button {{
+            Link {{
                 transition:0.7s;
                 font-weight:bold;
                 text-decoration:none;
                 color:black;
                 padding:10px 20px;
+                border:0px;
                 border-radius:50px;
             }}
 
-            button:hover {{
+            Link:hover {{
                 transition:0.7s;
                 font-weight:bold;
                 text-decoration:none;
@@ -110,7 +111,7 @@ def custom_docs():
                 box-shadow:0 0 20px 0 #0b1210;
             }}
 
-            button:focus {{
+            LInk:focus {{
                 outline:none;
             }}
                 </style>
