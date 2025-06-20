@@ -103,7 +103,7 @@ def generatetoken():
         data = (token, 0)
         cursor.execute(insert_query, data)
         db.conn.commit()
-        printf(token)
+        print(token)
         return {"token": token}
     except Exception as e:
         print("Eroare la inserare în DB:", e)
