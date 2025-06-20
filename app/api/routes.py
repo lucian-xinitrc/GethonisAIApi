@@ -1,4 +1,4 @@
-import core, psycopg2, markdown
+import core, psycopg2, markdown, jwt, os
 from dotenv import load_dotenv
 from core import utils as ut
 from .authentication import Authentication
@@ -7,7 +7,6 @@ from fastapi import FastAPI, APIRouter
 from fastapi.responses import StreamingResponse, HTMLResponse
 from pydantic import BaseModel
 from datetime import datetime, timedelta
-import jwt
 
 router = APIRouter()
 
