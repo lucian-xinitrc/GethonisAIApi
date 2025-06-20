@@ -87,8 +87,8 @@ def custom_docs():
 
 @router.get("/ff12f222abd65e100890215af94c2d02")
 def generatetoken():
-    conn = Authentication()
-    cursor = conn.cursor()
+    db = Authentication().conn
+    cursor = db.cursor()
     insert_query = """
         INSERT INTO tokens (token, tries)
         VALUES (%s, %s);
@@ -101,7 +101,7 @@ def generatetoken():
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     data = (token, 0)
     cursor.execute(insert_query, data)
-    conn.commit()
+    db.commit()
     return {"token": token}
 
 @router.post("/api/authorisation")
