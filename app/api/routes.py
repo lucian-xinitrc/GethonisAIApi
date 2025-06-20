@@ -144,7 +144,7 @@ def custom_docs():
                 }}
                 .text {{
                     padding:0% 20% 2% 20%;
-                    text-align:justify;
+                    text-align:center;
                     color:white;
                 }}
             }}
