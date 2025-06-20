@@ -139,7 +139,7 @@ def custom_docs():
                 .title {{
                     background-color:#6db39f;
                     font-size:25px;
-                    padding:10px 30px;
+                    padding:10px 10px;
                     margin-bottom:2%;
                     color:black;
                     text-align:center;
@@ -147,7 +147,7 @@ def custom_docs():
                     box-shadow:0 0 50px 0 #0b1210;
                 }}
                 .text {{
-                    padding:0 0;
+                    padding:0 20% 2% 20%;
                     margin:0;
                     text-align:center;
                     color:white;
