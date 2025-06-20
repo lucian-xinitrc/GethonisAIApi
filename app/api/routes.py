@@ -143,7 +143,7 @@ def custom_docs():
                     box-shadow:0 0 50px 0 #0b1210;
                 }}
                 .text {{
-                    padding:0% 20% 2% 20%;
+                    padding:0 10% 0 10%;
                     text-align:center;
                     color:white;
                 }}
