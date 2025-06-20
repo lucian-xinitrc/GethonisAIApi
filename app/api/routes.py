@@ -98,11 +98,12 @@ def generatetoken():
         INSERT INTO tokens (token, tries)
         VALUES (%s, %s);
         """
-    token = "geth-" + secrets.token_urlsafe(10)
+    token = "geth-" + secrets.token_hex(4) 
     try:
         data = (token, 0)
         cursor.execute(insert_query, data)
         db.conn.commit()
+        printf(token)
         return {"token": token}
     except Exception as e:
         print("Eroare la inserare în DB:", e)
