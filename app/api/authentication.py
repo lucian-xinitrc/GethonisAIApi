@@ -8,6 +8,16 @@ class Authentication():
 		self.conn = session.conn
 	def check_auth(self, token):
 		api_tokens = self.conn.cursor()
-		api_tokens.execute(f"SELECT * FROM public.tokens WHERE token = '{token}'")
-		if api_tokens.fetchone():
-			self.auth = True
+		api_tokens.execute("SELECT tries FROM public.tokens WHERE token = %s", (token,))
+		result = api_tokens.fetchone()
+
+		if result:
+		    if result[0] <= 2:
+		    	self.auth = True
+		    	api_tokens.execute(
+			        "UPDATE public.tokens SET tries = tries + 1 WHERE token = %s",
+			        (token,)
+			    )
+			    self.conn.commit()
+		else:
+		    self.auth = False
