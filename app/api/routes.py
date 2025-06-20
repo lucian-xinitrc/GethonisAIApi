@@ -104,7 +104,8 @@ def generatetoken():
         "exp": datetime.utcnow() + timedelta(minutes=15)
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    token = token.decode("utf-8")
+    if isinstance(token, bytes):
+        token = token.decode("utf-8")
     try:
         data = (token, 0)
         cursor.execute(insert_query, data)
