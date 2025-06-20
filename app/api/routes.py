@@ -131,6 +131,23 @@ def custom_docs():
             .white-text {{
                 color:white;
             }}
+            @media only screen and (max-width: 600px) {{
+                .title {{
+                    background-color:#6db39f;
+                    font-size:20px;
+                    padding:10px 30px;
+                    margin-bottom:2%;
+                    color:black;
+                    text-align:center;
+                    border-radius:50px;
+                    box-shadow:0 0 50px 0 #0b1210;
+                }}
+                .text {{
+                    padding:0% 10% 2% 10%;
+                    text-align:justify;
+                    color:white;
+                }}
+            }}
                 </style>
             </head>
             <body>
