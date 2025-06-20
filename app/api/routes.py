@@ -278,8 +278,6 @@ def check(tryIt: ut.Try):
 		conn.check_auth(tryIt.token)
 		if conn.auth == True:
 			return {"Status": "Positive"}
-        else:
-            return {"Status": "Your token expired."}
 	except:
 		return {"Status": "Negative"}
 
