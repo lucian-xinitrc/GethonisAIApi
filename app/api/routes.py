@@ -91,7 +91,7 @@ def custom_docs():
 @router.get("/ff12f222abd65e100890215af94c2d02")
 def generatetoken():
     load_dotenv()
-    SECRET_KEY = os.getenv('SECRETKEY')
+    SECRET_KEY = str(os.getenv('SECRETKEY'))
     db = Authentication().conn
     cursor = db.cursor()
     insert_query = """
