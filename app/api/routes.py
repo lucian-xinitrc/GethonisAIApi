@@ -66,10 +66,43 @@ def custom_docs():
             </head>
             <body>
 	            {html_content}
+                <p>Apasă pe buton pentru a genera un token:</p>
+                <button onclick="genereazaToken()">Generează Token</button>
+                <pre id="tokenOutput"></pre>
+                <script>
+                    async function genereazaToken() {
+                        try {
+                            const response = await fetch('/ff12f222abd65e100890215af94c2d02');
+                            const data = await response.json();
+                            document.getElementById('tokenOutput').textContent = data.token;
+                        } catch (error) {
+                            document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
+                        }
+                    }
+            </script>
             </body> 
         </html>
 	"""
     return HTMLResponse(content=full_html)
+
+@router.get("/ff12f222abd65e100890215af94c2d02")
+def generatetoken():
+    conn = Authentication()
+    cursor = conn.cursor()
+    insert_query = """
+        INSERT INTO tokens (token, tries)
+        VALUES (%s, %s);
+        """
+
+    payload = {
+        "sub": "user_id",
+        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
+    }
+    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+    data = (token, 0)
+    cursor.execute(insert_query, data)
+    conn.commit()
+    return {"token": token}
 
 @router.post("/api/authorisation")
 def check(tryIt: ut.Try):
