@@ -5,4 +5,5 @@ pydantic>=2.10.6
 psycopg2-binary
 uvicorn
 PyJWT
+secrets
 markdown

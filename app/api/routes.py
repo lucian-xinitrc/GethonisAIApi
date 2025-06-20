@@ -1,4 +1,4 @@
-import core, psycopg2, markdown, jwt, os
+import core, psycopg2, markdown, os, secrets
 from dotenv import load_dotenv
 from core import utils as ut
 from .authentication import Authentication
@@ -99,13 +99,8 @@ def generatetoken():
         VALUES (%s, %s);
         """
 
-    payload = {
-        "sub": "user_id",
-        "exp": datetime.utcnow() + timedelta(minutes=15)
-    }
-    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    if isinstance(token, bytes):
-        token = token.decode("utf-8")
+    
+    token = "geth-" + secrets.token_urlsafe(16)
     try:
         data = (token, 0)
         cursor.execute(insert_query, data)
