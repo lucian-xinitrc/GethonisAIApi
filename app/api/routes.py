@@ -1,4 +1,5 @@
 import core, psycopg2, markdown
+from dotenv import load_dotenv
 from core import utils as ut
 from .authentication import Authentication
 from typing import List, Dict
@@ -9,6 +10,8 @@ from datetime import datetime, timedelta
 import jwt
 
 router = APIRouter()
+
+SECRET_KEY = os.getenv('SECRETKEY')
 
 @router.get("/", response_class=HTMLResponse)
 def custom_docs():
