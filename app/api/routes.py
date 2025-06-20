@@ -114,6 +114,18 @@ def custom_docs():
             .Link:focus {{
                 outline:none;
             }}
+
+            .list {{
+              width:100%;
+              align-items:center;
+              display:flex;
+              justify-content: center;
+            }}
+
+            .main {{
+                display:flex;
+                justify-content: center;
+            }}
                 </style>
             </head>
             <body>
@@ -123,11 +135,12 @@ def custom_docs():
                     <p>Gethonis is an API that combines responses from ChatGPT4 and DeepSeek V3. It analyzes the prompt you gave him and he responds with the best version of your response by generating prompt on ChatGPT4 and DeepSeek, compares both responses and it gives the best version of them.</p>
                 </section>
                 <section class="main">
-                    <section class="list white-text">
                     <section class="text">
-                        <p>Press on the button to generate a token.</p>
-                        <pre id="tokenOutput"></pre>
+                            <p>Press on the button to generate a token.</p>
+                            <pre id="tokenOutput"></pre>
                     </section>
+                    <section class="list white-text">
+                        
                         <button class="Link white-text" onclick="genereazaToken()">Generează Token</button>
                     </section>
                     
