@@ -98,7 +98,7 @@ def generatetoken():
 
     payload = {
         "sub": "user_id",
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
+        "exp": datetime.utcnow() + timedelta(minutes=15)
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     data = (token, 0)
