@@ -91,6 +91,10 @@ def custom_docs():
                 box-shadow:0 0 50px 0 #0b1210;
             }}
 
+            .App-header h1 {{
+                margin:0;
+            }}
+
             .Link {{
                 transition:0.7s;
                 font-weight:bold;
