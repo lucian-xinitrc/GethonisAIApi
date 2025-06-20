@@ -6,6 +6,7 @@ from fastapi import FastAPI, APIRouter
 from fastapi.responses import StreamingResponse, HTMLResponse
 from pydantic import BaseModel
 from datetime import datetime, timedelta
+import jwt
 
 router = APIRouter()
 
