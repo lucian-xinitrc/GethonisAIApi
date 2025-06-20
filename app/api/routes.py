@@ -104,10 +104,16 @@ def generatetoken():
         "exp": datetime.utcnow() + timedelta(minutes=15)
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    data = (str(token), 0)
-    cursor.execute(insert_query, data)
-    db.conn.commit()
-    return {"token": token}
+    token = token.decode("utf-8")
+    try:
+        data = (token, 0)
+        cursor.execute(insert_query, data)
+        db.conn.commit()
+        print("Token inserat cu succes")
+        return {"token": token}
+    except Exception as e:
+        print("Eroare la inserare în DB:", e)
+        return {"error": str(e)}
 
 @router.post("/api/authorisation")
 def check(tryIt: ut.Try):
