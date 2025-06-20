@@ -1,4 +1,4 @@
- # Gethonis API
+# Gethonis API
 
 ## About
 
