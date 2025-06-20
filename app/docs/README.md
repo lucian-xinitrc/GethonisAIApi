@@ -1,57 +1,51 @@
 # Gethonis API
 
-## Tutorial how to use the test script
+## About
 
-### Run the script
-The name of the script is `test.py`
-```bash
-python3 test.py
-```
+A lightweight Python library to interact with the Gethonis API. Gethonis combines the best of OpenAI's ChatGPT responses with DeepSeek's capabilities for an enhanced conversational experience.
 
-### Set the Values
-**First Prompt**
-In the first prompt you will set what AI model you will use.
-```
-Please type what AI client do you want:
-```
-Here you have three options:
-`gethonis`
-`openai`
-`deepseek`
 
-**Second Prompt**
-In the second prompt you will need to type the token.
-```
-Please insert the token:
-```
-The token for testing is: `TEST`
+## Gethonis Class Arguments
 
-**Third Prompt**
-Here you will need to tell the program if you want with streaming or not.
-```
-Streaming? yes or no: 
-```
-The options as presented above are:
-`yes`
-`no`
+### Basic Example
 
-### API Prompt
-***Note: If the screen displays the text <Positive> than you have been authorised, if it says <Negative> contact the admin.***
-**Insert Prompts**
-As it is presented now you can insert any prompt that you want.
-```
-[ Write the prompt: ] 
+```python
+import gethonis as geth
+
+bot = geth.Gethonis("some token", "gethonis", False, "http://ip:port")
+message = "Test Meessage"
+print(bot.get_message(message))
 ```
 
-### Settings
-You can change the AI model or the streaming option while you are using the test program.
-**Change the AI model**
-Just simply time on write the prompt, `change_model`
+**Models:**
+* `gethonis`
+* `openai`
+* `deepseek`
+
+
+### Class Example
+
+```python
+class Gethonis:
+    """
+    The python client for API interaction 
+    Args:
+        token (str): The token for authentication
+        model (str): The AI model wanted
+        stream (bool): If the user wants streaming response or not
+        base_url (str): The url that the API runs operates on.
+    """
+    def get_message(self, message):
+        """
+        The user sends a message and the API responds.
+            
+        Args:
+            message (str): The message that is sent by the user
+                
+        Returns:
+            dictionary or requests.Response: As response from the API.
+        """
 ```
-[ Write the prompt: ] change_model
-```
-**Change the Streaming status**
-Just simply time on write the prompt, `change_stream`
-```
-[ Write the prompt: ] change_stream
-```
+
+
+

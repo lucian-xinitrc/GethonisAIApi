@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
-@router.get("/help", response_class=HTMLResponse)
+@router.get("/docs", response_class=HTMLResponse)
 def custom_docs():
     with open("docs/README.md", "r") as f:
         content = f.read()
