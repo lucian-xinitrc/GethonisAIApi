@@ -70,16 +70,16 @@ def custom_docs():
                 <button onclick="genereazaToken()">Generează Token</button>
                 <pre id="tokenOutput"></pre>
                 <script>
-                    async function genereazaToken() {
-                        try {
+                    async function genereazaToken() {{
+                        try {{
                             const response = await fetch('/ff12f222abd65e100890215af94c2d02');
                             const data = await response.json();
                             document.getElementById('tokenOutput').textContent = data.token;
-                        } catch (error) {
+                        }} catch (error) {{
                             document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
-                        }
-                    }
-            </script>
+                        }}
+                    }}
+                </script>
             </body> 
         </html>
 	"""
