@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.get("/help", response_class=HTMLResponse)
 def custom_docs():
-    with open("docs/", "r") as f:
+    with open("docs/README.md", "r") as f:
         content = f.read()
     html_content = markdown.markdown(content, extensions=["fenced_code", "tables"])
 
