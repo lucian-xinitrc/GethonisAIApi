@@ -23,5 +23,5 @@ jobs:
             cd app/
             sudo docker stop gethonis-api
             sudo docker rm gethonis-api
-            sudo docker build -t gethonisapi .
+            sudo docker build --no-cache -t gethonisapi .
             sudo docker run -d -p 8000:8000 --restart unless-stopped --name gethonis-api gethonisapi
