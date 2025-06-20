@@ -139,12 +139,16 @@ def custom_docs():
                 .title {{
                     background-color:#6db39f;
                     font-size:25px;
-                    padding:10px 10px;
+                    padding:10px 30px;
+                    margin:0;
                     margin-bottom:2%;
                     color:black;
                     text-align:center;
                     border-radius:50px;
                     box-shadow:0 0 50px 0 #0b1210;
+                }}
+                .title h1{{
+                    margin:0;
                 }}
                 .text {{
                     padding:0 20% 2% 20%;
