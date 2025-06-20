@@ -12,7 +12,7 @@ class Authentication():
 		result = api_tokens.fetchone()
 
 		if result:
-		    if result[0] <= 2:
+		    if int(result[0]) <= 2:
 		    	self.auth = True
 		    	api_tokens.execute(
 			        "UPDATE public.tokens SET tries = tries + 1 WHERE token = %s",
