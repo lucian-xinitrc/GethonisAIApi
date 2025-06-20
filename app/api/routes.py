@@ -104,7 +104,7 @@ def generatetoken():
         "exp": datetime.utcnow() + timedelta(minutes=15)
     }
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-    data = (token, 0)
+    data = (str(token), 0)
     cursor.execute(insert_query, data)
     db.conn.commit()
     return {"token": token}
