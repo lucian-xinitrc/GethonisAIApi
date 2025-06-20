@@ -65,6 +65,25 @@ def custom_docs():
             tr:nth-child(even) {{
                         background-color: #1a1a1a;
                     }}
+
+            button {{
+                transition:0.7s;
+                padding:10px 30px;
+                border:0px;
+                border-radius:50px;
+                font-weight:bold;
+                background-color:white;
+            }}
+
+            button:hover {{
+                transition:0.7s;
+                box-shadow:0 0 10px 0 #000000;
+
+            }}
+
+            button:focus {{
+                outline:none;
+            }}
                 </style>
             </head>
             <body>
