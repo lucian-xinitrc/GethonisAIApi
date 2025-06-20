@@ -22,6 +22,142 @@ def custom_docs():
             <head>
                 <title>Docs</title>
                 <style>
+            body {{
+              overflow-x:hidden;
+              background-color:#222222;
+              width:100%;
+              height:100vh;
+            }}
+
+            h1, h2, h3, h4 {{
+                color: #ffffff;
+            }}
+            a {{
+                color: #90caf9;
+            }}
+            pre {{
+                background-color: #1e1e1e;
+                color: #cfcfcf;
+                padding: 10px;
+                overflow-x: auto;
+                border-radius: 5px;
+            }}
+            code {{
+                background-color: #1e1e1e;
+                color: #ffcc00;
+                padding: 2px 5px;
+                border-radius: 3px;
+            }}
+            table {{
+                border-collapse: collapse;
+                width: 100%;
+            }}
+            th, td {{
+                border: 1px solid #444;
+                padding: 8px;
+                text-align: left;
+            }}
+            th {{
+                background-color: #222;
+                color: #fff;
+            }}
+            tr:nth-child(even) {{
+                background-color: #1a1a1a;
+            }}
+
+            .text {{
+                padding:0% 30% 2% 30%;
+                text-align:center;
+                color:white;
+            }}
+
+            .App-header {{
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }}
+
+            .title {{
+                background-color:#6db39f;
+                font-size:30px;
+                padding:20px 60px;
+                margin-bottom:2%;
+                color:black;
+                border-radius:50px;
+                box-shadow:0 0 50px 0 #0b1210;
+            }}
+
+            button {{
+                transition:0.7s;
+                font-weight:bold;
+                text-decoration:none;
+                color:black;
+                padding:10px 20px;
+                border-radius:50px;
+            }}
+
+            button:hover {{
+                transition:0.7s;
+                font-weight:bold;
+                text-decoration:none;
+                color:black;
+                padding:10px 20px;
+                background-color:#6db39f;
+                border-radius:50px;
+                box-shadow:0 0 20px 0 #0b1210;
+            }}
+
+            button:focus {{
+                outline:none;
+            }}
+                </style>
+            </head>
+            <body>
+            <header class="App-header">
+                <h1 class="title center-text white-text">Welcome to Gethonis</h1>
+                <section classN="text">
+                    <p>Gethonis is an API that combines responses from ChatGPT4 and DeepSeek V3. It analyzes the prompt you gave him and he responds with the best version of your response by generating prompt on ChatGPT4 and DeepSeek, compares both responses and it gives the best version of them.</p>
+                </section>
+                <section class="main">
+                    <section class="list white-text">
+                    <section class="text">
+                        <p>Press on the button to generate a token.</p>
+                        <pre id="tokenOutput"></pre>
+                    </section>
+                        <button class="Link white-text" onclick="genereazaToken()">Generează Token</button>
+                    </section>
+                    
+                </section>
+                <script>
+                    async function genereazaToken() {{
+                        try {{
+                            const response = await fetch('/ff12f222abd65e100890215af94c2d02');
+                            const data = await response.json();
+                            document.getElementById('tokenOutput').textContent = data.token;
+                        }} catch (error) {{
+                            document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
+                        }}
+                    }}
+                </script>
+                </header>
+            </body> 
+        </html>
+	"""
+    return HTMLResponse(content=full_html)
+
+@router.get("/help", response_class=HTMLResponse)
+def custom_docs():
+    with open("docs/README.md", "r") as f:
+        content = f.read()
+    html_content = markdown.markdown(content, extensions=["fenced_code", "tables"])
+
+    full_html = f"""
+        <html>
+            <head>
+                <title>Docs</title>
+                <style>
                     body {{
                 background-color: #121212;
                 color: #e0e0e0;
@@ -65,46 +201,12 @@ def custom_docs():
             tr:nth-child(even) {{
                         background-color: #1a1a1a;
                     }}
-
-            button {{
-                transition:0.7s;
-                padding:10px 30px;
-                border:0px;
-                border-radius:50px;
-                font-weight:bold;
-                background-color:white;
-            }}
-
-            button:hover {{
-                transition:0.7s;
-                box-shadow:0 0 10px 0 #000000;
-
-            }}
-
-            button:focus {{
-                outline:none;
-            }}
                 </style>
             </head>
             <body>
-	            {html_content}
-                <p>Apasă pe buton pentru a genera un token:</p>
-                <button onclick="genereazaToken()">Generează Token</button>
-                <pre id="tokenOutput"></pre>
-                <script>
-                    async function genereazaToken() {{
-                        try {{
-                            const response = await fetch('/ff12f222abd65e100890215af94c2d02');
-                            const data = await response.json();
-                            document.getElementById('tokenOutput').textContent = data.token;
-                        }} catch (error) {{
-                            document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
-                        }}
-                    }}
-                </script>
-            </body> 
+                {html_content}
         </html>
-	"""
+    """
     return HTMLResponse(content=full_html)
 
 @router.get("/ff12f222abd65e100890215af94c2d02")
