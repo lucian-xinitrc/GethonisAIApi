@@ -134,7 +134,7 @@ def custom_docs():
             @media only screen and (max-width: 600px) {{
                 .title {{
                     background-color:#6db39f;
-                    font-size:20px;
+                    font-size:25px;
                     padding:10px 30px;
                     margin-bottom:2%;
                     color:black;
@@ -143,7 +143,7 @@ def custom_docs():
                     box-shadow:0 0 50px 0 #0b1210;
                 }}
                 .text {{
-                    padding:0% 10% 2% 10%;
+                    padding:0% 20% 2% 20%;
                     text-align:justify;
                     color:white;
                 }}
