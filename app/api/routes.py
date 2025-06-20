@@ -169,11 +169,11 @@ def custom_docs():
                 </section>
                 <section class="main">
                     <section class="list">
-                        <button class="Link" onclick="genereazaToken()">Generează Token</button>
+                        <button class="Link" onclick="generateToken()">Generate Token</button>
                     </section>
                 </section>
                 <script>
-                    async function genereazaToken() {{
+                    async function generateToken() {{
                         try {{
                             const response = await fetch('/ff12f222abd65e100890215af94c2d02');
                             const data = await response.json();
