@@ -12,7 +12,9 @@ class Authentication():
 		result = api_tokens.fetchone()
 
 		if result:
-			if int(result[0]) <= 3:
+			api_tokens.execute("SELECT type FROM tokens WHERE token = %s", (token,))
+			permanent = api_tokens.fetchone()
+			if int(result[0]) <= 3 or permanent == "PERMANENT":
 				self.auth = True
 				api_tokens.execute("UPDATE tokens SET tries = tries + 1 WHERE token = %s", (token,))
 				self.conn.commit()
