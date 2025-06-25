@@ -23,7 +23,7 @@ def deepseek(message, stream):
     client = OpenAI(api_key=os.getenv("TOKENDEEPSEEK"), base_url=os.getenv("DEEPSEEKBASEURL"))
 
     response = client.chat.completions.create(
-        model=os.getenv("DEEPSEELMODELNAME"),
+        model=os.getenv("DEEPSEEKMODELNAME"),
         messages=message,
         stream=stream
     )
