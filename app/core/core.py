@@ -20,10 +20,10 @@ def openai(message, stream):
         yield response.choices[0].message.content
 
 def deepseek(message, stream):
-    client = OpenAI(api_key=os.getenv("TOKENDEEPSEEK"), base_url="https://api.deepseek.com")
+    client = OpenAI(api_key=os.getenv("TOKENDEEPSEEK"), base_url=os.getenv("DEEPSEEKBASEURL"))
 
     response = client.chat.completions.create(
-        model="deepseek-chat",
+        model=os.getenv("DEEPSEELMODELNAME"),
         messages=message,
         stream=stream
     )
