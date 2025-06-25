@@ -10,7 +10,6 @@ from datetime import datetime, timedelta
 
 router = APIRouter()
 
-
 @router.get("/", response_class=HTMLResponse)
 def custom_docs():
     with open("docs/README.md", "r") as f:
