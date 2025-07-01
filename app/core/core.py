@@ -5,6 +5,7 @@ from openai import OpenAI
 
 load_dotenv()
 
+
 def openai(message, stream):
     client = OpenAI(api_key=os.getenv("TOKENOPENAI"))
     response = client.chat.completions.create(
@@ -19,11 +20,23 @@ def openai(message, stream):
     else:
         yield response.choices[0].message.content
 
-def deepseek(message, stream):
-    client = OpenAI(api_key=os.getenv("TOKENDEEPSEEK"), base_url=os.getenv("DEEPSEEKBASEURL"))
+def secondai(ainame, message, stream):
+    creds = { 
+        1:{
+            'token': os.getenv("TOKENGROK"),
+            'baseUrl': os.getenv("GROKBASEURL"),
+            'modelName': os.getenv("GROKMODELNAME")
+        },
+        2:{
+            'token': os.getenv("TOKENDEEPSEEK"),
+            'baseUrl': os.getenv("DEEPSEEKBASEURL"),
+            'modelName': os.getenv("DEEPSEEKMODELNAME")
+        }        
+    }
+    client = OpenAI(api_key=creds[ainame]['token'], base_url=creds[ainame]['baseUrl'])
 
     response = client.chat.completions.create(
-        model=os.getenv("DEEPSEEKMODELNAME"),
+        model=creds[ainame]['modelName'],
         messages=message,
         stream=stream
     )
