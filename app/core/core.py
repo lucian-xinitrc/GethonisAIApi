@@ -5,7 +5,6 @@ from openai import OpenAI
 
 load_dotenv()
 
-
 def openai(message, stream):
     client = OpenAI(api_key=os.getenv("TOKENOPENAI"))
     response = client.chat.completions.create(

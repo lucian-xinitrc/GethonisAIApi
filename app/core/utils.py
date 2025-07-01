@@ -14,6 +14,11 @@ class Message(BaseModel):
 class Try(BaseModel):
 	token: str
 
+class PostContent(BaseModel):
+	headers: str
+	type: str
+	prompt: str
+
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
 	conn.check_auth(token)
@@ -53,3 +58,48 @@ def non_streaming(token, message, mediatype, choice):
 				if choice == 3:
 					return core.secondai(1, message, False)
 	return "Unfortunately you don't have permission"
+
+def post_returning(token, type, message, choice):
+	if choice == 1:
+			openai_response = ''.join(core.openai(message, False))
+			deepseek_response = ''.join(core.secondai(1, message, False))
+			random = randint(0, 1)
+			message.append({"role": "user", "content": f"""
+					You are a rewriting assistant. Merge the following two AI responses into one seamless and consistent text, without revealing that they were merged:
+
+					Response 1:
+					### {openai_response} ###
+
+					Response 2:
+					{deepseek_response}
+
+					Your job:
+					- Fuse their ideas into a unified, creative article
+					- Keep the language natural, flowing, and on-topic
+					- Avoid repetitions and contradictions
+					- Return ONLY a JSON object in the format below — no explanation, no comments
+
+					Format:
+					{{
+					  "Post": {{
+					    "Title": "Title of Post",
+					    "paragraphs": [
+					      "Paragraph 1 (start strong, intro)",
+					      "Paragraph 2 (develop idea)",
+					      "Paragraph 3 (add insight or vision)"
+					    ],
+					    "Footer": "Footer"
+					  }}
+					}}
+				"""})
+			if random == 1:
+				return core.openai(message, False)
+			return core.secondai(1, message, False)
+		else:
+			if choice == 2:
+				return core.openai(message, False)
+			else:
+				if choice == 3:
+					return core.secondai(1, message, False)
+	return "Unfortunately you don't have permission"
+

@@ -296,6 +296,13 @@ def response_gethonis(action: ut.Message):
 	if action.stream:
 		return ut.streaming(token, message, "text/plain", 1)
 	return ut.non_streaming(token, message, "text/plain", 1)
+
+@router.post("/api/post")
+def response_gethonis(postc: ut.PostConten):
+    token = postc.headers
+    type = postc.type
+    message = postc.messages
+    return ut.post_returning(token, type, message, "text/plain", 1)
 	
 
 @router.post("/api/openai")
