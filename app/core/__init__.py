@@ -1,3 +1,3 @@
-from .core import openai, deepseek
+from .core import openai, secondai
 
-__all__ = ['openai', 'deepseek']
+__all__ = ['openai', 'secondai']
