@@ -297,7 +297,7 @@ def response_gethonis(action: ut.Message):
 		return ut.streaming(token, message, "text/plain", 1)
 	return ut.non_streaming(token, message, "text/plain", 1)
 
-@router.post("/api/post")
+@router.post("/api/posts")
 def response_gethonis(postc: ut.PostContent):
     token = postc.headers
     type = postc.type
