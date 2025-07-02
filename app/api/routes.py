@@ -302,7 +302,7 @@ def response_gethonis(postc: ut.PostContent):
     token = postc.headers
     type = postc.type
     message = postc.prompt
-    return ut.post_returning(token, type, message, "text/plain", 1)
+    return ut.post_returning(token, type, message, 1)
 	
 
 @router.post("/api/openai")
