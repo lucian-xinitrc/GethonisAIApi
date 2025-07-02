@@ -17,7 +17,7 @@ class Try(BaseModel):
 class PostContent(BaseModel):
 	headers: str
 	type: str
-	prompt: str
+	prompt: List[Dict]
 
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
