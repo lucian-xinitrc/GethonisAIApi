@@ -301,7 +301,7 @@ def response_gethonis(action: ut.Message):
 def response_gethonis(postc: ut.PostContent):
     token = postc.headers
     type = postc.type
-    message = postc.messages
+    message = postc.prompt
     return ut.post_returning(token, type, message, "text/plain", 1)
 	
 
