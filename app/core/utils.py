@@ -61,10 +61,10 @@ def non_streaming(token, message, mediatype, choice):
 
 def post_returning(token, type, message, choice):
 	if choice == 1:
-			openai_response = ''.join(core.openai(message, False))
-			deepseek_response = ''.join(core.secondai(1, message, False))
-			random = randint(0, 1)
-			message.append({"role": "user", "content": f"""
+		openai_response = ''.join(core.openai(message, False))
+		deepseek_response = ''.join(core.secondai(1, message, False))
+		random = randint(0, 1)
+		message.append({"role": "user", "content": f"""
 					You are a rewriting assistant. Merge the following two AI responses into one seamless and consistent text, without revealing that they were merged:
 
 					Response 1:
@@ -92,14 +92,14 @@ def post_returning(token, type, message, choice):
 					  }}
 					}}
 				"""})
-			if random == 1:
-				return core.openai(message, False)
-			return core.secondai(1, message, False)
+		if random == 1:
+			return core.openai(message, False)
+		return core.secondai(1, message, False)
+	else:
+		if choice == 2:
+			return core.openai(message, False)
 		else:
-			if choice == 2:
-				return core.openai(message, False)
-			else:
-				if choice == 3:
-					return core.secondai(1, message, False)
+			if choice == 3:
+				return core.secondai(1, message, False)
 	return "Unfortunately you don't have permission"
 
