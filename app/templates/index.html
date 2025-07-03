@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Docs</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <header class="App-header">
+            <h1 class="title center-text">Welcome to Gethonis</h1>
+            <section class="text">
+                <p>Gethonis is an API that combines responses from ChatGPT4 and Grok V3. It analyzes the prompt you gave him and he responds with the best version of your response by generating prompt on ChatGPT4 and Grok, compares both responses and it gives the best version of them.</p>
+            </section>
+            <section class="main">
+                <section class="list white-text">
+                                <p>Press on the button to generate a token.</p>
+                </section>   
+            </section>
+            <section class="main">
+                <section class="list white-text">
+                    <p>Token: </p>
+                    <pre id="tokenOutput"></pre>
+                </section>   
+            </section>
+            <section class="main">
+                <section class="list">
+                    <button class="Link" onclick="generateToken()">Generate Token</button>
+                </section>
+            </section>
+            <script>
+                async function generateToken() {
+                    try {
+                        const response = await fetch('/ff12f222abd65e100890215af94c2d02');
+                        const data = await response.json();
+                        document.getElementById('tokenOutput').textContent = data.token;
+                    } catch (error) {
+                        document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
+                    }
+                }
+            </script>
+        </header>
+    </body> 
+</html>
