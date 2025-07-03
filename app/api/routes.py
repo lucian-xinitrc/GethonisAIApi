@@ -1,4 +1,4 @@
-import core, psycopg2, markdown, os, secrets
+import core, psycopg2, markdown, os, secrets, requests
 from dotenv import load_dotenv
 from core import utils as ut
 from .authentication import Authentication
