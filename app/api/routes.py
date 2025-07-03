@@ -77,14 +77,6 @@ def response_gethonis(postc: ut.PostContent):
     message = postc.prompt
     return ut.post_returning(token, type, message, 1)
 
-@router.post("/api/check")
-def checkbotid():
-
-
-@router.post("/api/addonbotid")
-def addonid():
-
-
 @router.post("/api/openai")
 def response_openai(action: ut.Message):
 	token = action.headers
