@@ -10,7 +10,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.responses import StreamingResponse, HTMLResponse
 
-
 # Router initialiser
 router = APIRouter()
 
