@@ -18,7 +18,7 @@ templates = Jinja2Templates(directory="templates")
 
 # Main Page displayer
 @router.get("/")
-def custom_docs(request: Request):
+def custom_docs(request: Requests):
     return templates.TemplateResponse("index.html", {"request": request})
 
 # Help README.md displayer
