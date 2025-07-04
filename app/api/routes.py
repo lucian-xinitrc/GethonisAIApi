@@ -1,13 +1,13 @@
 import core, psycopg2, markdown, os, secrets, requests
-from dotenv import load_dotenv
 from core import utils as ut
-from .authentication import Authentication
 from typing import List, Dict
-from fastapi import FastAPI, APIRouter
-from fastapi.responses import StreamingResponse, HTMLResponse
-from fastapi.templating import Jinja2Templates
+from dotenv import load_dotenv
 from pydantic import BaseModel
 from datetime import datetime, timedelta
+from .authentication import Authentication
+from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI, APIRouter, Request
+from fastapi.responses import StreamingResponse, HTMLResponse
 
 
 # Router initialiser
@@ -18,7 +18,7 @@ templates = Jinja2Templates(directory="templates")
 
 # Main Page displayer
 @router.get("/")
-def custom_docs(request: Requests):
+def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 # Help README.md displayer
