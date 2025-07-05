@@ -32,7 +32,7 @@ def secondai(ainame, message, stream):
             'modelName': os.getenv("DEEPSEEKMODELNAME")
         }        
     }
-    client = OpenAI(api_key=creds[ainame]['token'], base_url=creds[ainame]['baseUrl'], timeout=3600)
+    client = OpenAI(api_key=creds[ainame]['token'], base_url=creds[ainame]['baseUrl'])
 
     response = client.chat.completions.create(
         model=creds[ainame]['modelName'],
