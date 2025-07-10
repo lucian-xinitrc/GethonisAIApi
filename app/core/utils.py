@@ -19,6 +19,39 @@ class PostContent(BaseModel):
 	type: str
 	prompt: List[Dict]
 
+class PostAdd(BaseModel):
+	headers: str
+	id: str
+	prompt: str
+
+class PostVerify(BaseModel):
+	headers: str
+	id: str
+
+def checkPost(token, id):
+	conn = auth.Authentication() 
+
+def addPost(token, id, message):
+	db = auth.Authentication()
+	db.check_auth(token)
+	addPostData = conn.cursor()
+	date = {
+    	"id": id,
+    	"content": post_returning(token, "", message, 1),
+	}
+
+	addPostData.execute(
+        "INSERT INTO posts_json (token, payload) VALUES (%s, %s)",
+        (token, json.dumps(date))
+    )
+
+    addPostData.execute(""INSERT INTO posts_json (token, payload) VALUES (%s, %s)",
+        (token, json.dumps(date))
+    )
+
+   	db.conn.commit()
+    addPostData.close()
+
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
 	conn.check_auth(token)

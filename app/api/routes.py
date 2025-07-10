@@ -71,11 +71,25 @@ def response_gethonis(action: ut.Message):
 	return ut.non_streaming(token, message, "text/plain", 1)
 
 @router.post("/api/post")
-def response_gethonis(postc: ut.PostContent):
+def get_post(postc: ut.PostContent):
     token = postc.headers
     type = postc.type
     message = postc.prompt
     return ut.post_returning(token, type, message, 1)
+
+@router.post("/api/checkpost"):
+def checkpost(check: PostVerify):
+    token = check.headers
+    id = check.id
+    return ut.checkPost(token, id)
+
+@router.post("/api/addpost"):
+def addpost(add: PostAdd):
+    token = add.headers
+    id = add.id
+    prompt = add.prompt
+    return ut.addPost(token, id, prompt)
+
 
 @router.post("/api/openai")
 def response_openai(action: ut.Message):
