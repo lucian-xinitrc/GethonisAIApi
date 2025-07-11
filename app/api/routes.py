@@ -86,11 +86,12 @@ def checkpost(check: ut.PostVerify):
     return ut.checkPost(token, id)
 
 @router.post("/api/addpost")
-def addpost(add: ut.PostAdd):
+async def addpost(add: ut.PostAdd):
     token = add.headers
     idy = add.id
     prompty = add.prompt
-    return ut.addPost(token, idy, prompty)
+    await ut.addPost(token, idy, prompty)
+    return {"status": "ok"}
 
 @router.post("/api/openai")
 def response_openai(action: ut.Message):
