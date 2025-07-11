@@ -36,7 +36,7 @@ def checkPost(token, id):
 def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
-	addPostData = db.cursor()
+	addPostData = db.conn.cursor()
 	date = post_returning(token, "", message, 1),
 
 	addPostData.execute(
@@ -44,7 +44,7 @@ def addPost(token, id, message):
 		(id, json.dumps(date.json))
 	)
 
-	db.commit()
+	db.conn.commit()
 	addPostData.close()
 
 def streaming(token, message, mediatype, choice):
