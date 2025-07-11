@@ -30,13 +30,13 @@ class PostVerify(BaseModel):
 
 def checkPost(token, id):
 	conn = auth.Authentication()
-	 
+
 
 # Adding post to database
 def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
-	addPostData = conn.cursor()
+	addPostData = db.cursor()
 	date = post_returning(token, "", message, 1),
 
 	addPostData.execute(
