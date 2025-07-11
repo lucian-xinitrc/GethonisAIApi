@@ -100,7 +100,7 @@ async def addpost(add: ut.PostAdd):
 
     addPostData.execute(
         "INSERT INTO posts_json (id, Data) VALUES (%s, %s)",
-        (idy, date.json())
+        (idy, date))
     )
 
     db.conn.commit()
