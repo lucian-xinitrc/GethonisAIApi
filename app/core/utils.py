@@ -43,7 +43,7 @@ def addPost(token, id, message):
 		(id, json.dumps(date.json))
 	)
 
-	db.conn.commit()
+	db.commit()
 	addPostData.close()
 
 def streaming(token, message, mediatype, choice):
