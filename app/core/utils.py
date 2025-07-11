@@ -33,15 +33,16 @@ def checkPost(token, id):
 
 
 # Adding post to database
-def addPost(token, id, message):
+async def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
 	addPostData = db.conn.cursor()
-	date = post_returning(token, "", message, 1)
+
+	date = await post_returning(token, "", message, 1)  # 👈 await, pentru că e async
 
 	addPostData.execute(
-	    "INSERT INTO posts_json (id, content) VALUES (%s, %s)",
-	    (id, date.json())
+		"INSERT INTO posts_json (id, content) VALUES (%s, %s)",
+		(id, date.json())
 	)
 
 	db.conn.commit()
