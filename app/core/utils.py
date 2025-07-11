@@ -37,7 +37,7 @@ def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
 	addPostData = db.conn.cursor()
-	date = post_returning(token, "", message, 1),
+	date = post_returning(token, "", message, 1)
 
 	addPostData.execute(
 	    "INSERT INTO posts_json (id, content) VALUES (%s, %s)",
