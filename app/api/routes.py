@@ -32,10 +32,11 @@ def custom_docs(request: Request):
         "html_content": html_content
     })
 
+
+# The route get route that generates the API Key
 @router.get("/ff12f222abd65e100890215af94c2d02")
 def generatetoken():
     load_dotenv()
-    SECRET_KEY = str(os.getenv('SECRETKEY'))
     db = Authentication()
     cursor = db.conn.cursor()
     insert_query = """
