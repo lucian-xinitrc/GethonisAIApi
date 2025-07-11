@@ -80,13 +80,13 @@ def get_post(postc: ut.PostContent):
     return ut.post_returning(token, type, message, 1)
 
 @router.post("/api/checkpost")
-def checkpost(check: PostVerify):
+def checkpost(check: ut.PostVerify):
     token = check.headers
     id = check.id
     return ut.checkPost(token, id)
 
 @router.post("/api/addpost")
-def addpost(add: PostAdd):
+def addpost(add: ut.PostAdd):
     token = add.headers
     id = add.id
     prompt = add.prompt
