@@ -91,7 +91,7 @@ async def addpost(add: ut.PostAdd):
     idy = add.id
     prompty = add.prompt
 
-    db = auth.Authentication()
+    db = Authentication()
     db.check_auth(token)
     addPostData = db.conn.cursor()
 
