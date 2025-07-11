@@ -95,7 +95,7 @@ async def addpost(add: ut.PostAdd):
     db.check_auth(token)
     addPostData = db.conn.cursor()
 
-    date = await ut.post_returning(token, "", prompty, 1)
+    date = ut.post_returning(token, "", prompty, 1)
 
     addPostData.execute(
         "INSERT INTO posts_json (id, Data) VALUES (%s, %s)",
