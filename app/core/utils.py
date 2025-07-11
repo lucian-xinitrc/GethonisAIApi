@@ -31,6 +31,7 @@ class PostVerify(BaseModel):
 def checkPost(token, id):
 	conn = auth.Authentication() 
 
+# Adding post to database
 def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
@@ -38,12 +39,12 @@ def addPost(token, id, message):
 	date = post_returning(token, "", message, 1),
 
 	addPostData.execute(
-        "INSERT INTO posts_json (id, content) VALUES (%s, %s)",
-        (id, json.dumps(date.json))
-    )
+		"INSERT INTO posts_json (id, content) VALUES (%s, %s)",
+		(id, json.dumps(date.json))
+	)
 
-   	db.conn.commit()
-    addPostData.close()
+	db.conn.commit()
+	addPostData.close()
 
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
