@@ -40,8 +40,8 @@ def addPost(token, id, message):
 	date = post_returning(token, "", message, 1),
 
 	addPostData.execute(
-		"INSERT INTO posts_json (id, content) VALUES (%s, %s)",
-		(id, json.dumps(date.json))
+	    "INSERT INTO posts_json (id, content) VALUES (%s, %s)",
+	    (id, date.json())
 	)
 
 	db.conn.commit()
