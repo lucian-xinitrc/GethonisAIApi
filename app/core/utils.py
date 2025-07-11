@@ -29,7 +29,8 @@ class PostVerify(BaseModel):
 	id: str
 
 def checkPost(token, id):
-	conn = auth.Authentication() 
+	conn = auth.Authentication()
+	 
 
 # Adding post to database
 def addPost(token, id, message):
