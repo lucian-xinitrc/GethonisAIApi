@@ -90,7 +90,20 @@ async def addpost(add: ut.PostAdd):
     token = add.headers
     idy = add.id
     prompty = add.prompt
-    await ut.addPost(token, idy, prompty)
+
+    db = auth.Authentication()
+    db.check_auth(token)
+    addPostData = db.conn.cursor()
+
+    date = ut.post_returning(token, "", prompty, 1)
+
+    addPostData.execute(
+        "INSERT INTO posts_json (id, Data) VALUES (%s, %s)",
+        (idy, date.json())
+    )
+
+    db.conn.commit()
+    addPostData.close()
     return {"status": "ok"}
 
 @router.post("/api/openai")
