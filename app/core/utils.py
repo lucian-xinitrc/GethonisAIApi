@@ -38,7 +38,7 @@ def addPost(token, id, message):
 	db.check_auth(token)
 	addPostData = db.conn.cursor()
 	messages = [
-		{"role": "system", "content": "You are a helpful assistant"}
+		{"role": "system", "content": "You are a helpful assistant"},
 		{"role": "user", "content": message}
 	],
 	date = post_returning(token, "", messages, 1),
