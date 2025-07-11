@@ -78,19 +78,18 @@ def get_post(postc: ut.PostContent):
     message = postc.prompt
     return ut.post_returning(token, type, message, 1)
 
-@router.post("/api/checkpost"):
+@router.post("/api/checkpost")
 def checkpost(check: PostVerify):
     token = check.headers
     id = check.id
     return ut.checkPost(token, id)
 
-@router.post("/api/addpost"):
+@router.post("/api/addpost")
 def addpost(add: PostAdd):
     token = add.headers
     id = add.id
     prompt = add.prompt
     return ut.addPost(token, id, prompt)
-
 
 @router.post("/api/openai")
 def response_openai(action: ut.Message):
