@@ -1,4 +1,4 @@
-import core, psycopg2, markdown, os, secrets, requests
+import core, psycopg2, markdown, os, secrets, requests, json
 from core import utils as ut
 from typing import List, Dict
 from dotenv import load_dotenv
@@ -95,11 +95,11 @@ async def addpost(add: ut.PostAdd):
     db.check_auth(token)
     addPostData = db.conn.cursor()
 
-    date = ut.post_returning(token, "", prompty, 1)
+    date = await ut.post_returning(token, "", prompty, 1)
 
     addPostData.execute(
         "INSERT INTO posts_json (id, Data) VALUES (%s, %s)",
-        (idy, date)
+        (idy, date.json())
     )
 
     db.conn.commit()
