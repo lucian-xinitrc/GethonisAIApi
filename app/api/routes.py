@@ -90,8 +90,7 @@ def addpost(add: ut.PostAdd):
     token = add.headers
     idy = add.id
     prompty = add.prompt
-    #return ut.addPost(token, id, prompt)
-    return {'Token': token, 'Id': idy, 'Prompt': prompty}
+    return ut.addPost(token, idy, prompty)
 
 @router.post("/api/openai")
 def response_openai(action: ut.Message):

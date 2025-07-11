@@ -22,7 +22,7 @@ class PostContent(BaseModel):
 class PostAdd(BaseModel):
 	headers: str
 	id: str
-	prompt: str
+	prompt: List[Dict]
 
 class PostVerify(BaseModel):
 	headers: str
@@ -37,11 +37,7 @@ def addPost(token, id, message):
 	db = auth.Authentication()
 	db.check_auth(token)
 	addPostData = db.conn.cursor()
-	messages = [
-		{"role": "system", "content": "You are a helpful assistant"},
-		{"role": "user", "content": message}
-	],
-	date = post_returning(token, "", messages, 1),
+	date = post_returning(token, "", message, 1),
 
 	addPostData.execute(
 		"INSERT INTO posts_json (id, content) VALUES (%s, %s)",
