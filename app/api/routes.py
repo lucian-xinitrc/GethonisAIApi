@@ -53,6 +53,7 @@ def generatetoken():
         print("Eroare la inserare în DB:", e)
         return {"error": str(e)}
 
+# The token authorisation path
 @router.post("/api/authorisation")
 def check(tryIt: ut.Try):
 	try:
