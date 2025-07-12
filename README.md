@@ -1,8 +1,8 @@
 # 🚀 GethonisAIApi
 ### API endpoint that merges outputs from two language models, applies response optimization, and returns the most suitable result.
 
-## 📸 2. Live Demo / Screenshots / Video
-![MainPage](app/static/gethonismainpage.png)
+## 📸 2. Screenshots / Diagram
+![MainPage](app/static/gethonismain.png)
 
 ![LogicDiagram](app/static/logicdiagram.png)
 
@@ -93,8 +93,8 @@ print(bot.get_message(message))
 ```
 
 ## 📄 10. API Documentation
-* Swagger UI: `https://api.gethonis.com/docs`
-* ReDoc: `https://api.gethonis.com/redoc`
+* Swagger UI: [api.gethonis.com/docs](https://api.gethonis.com/docs)
+* ReDoc: [api.gethonis.com/redocs](https://api.gethonis.com/docs)
 
 ## 🧪 11. Testing & CI/CD
 * Run tests: pytest tests/
