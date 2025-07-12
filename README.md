@@ -1,12 +1,30 @@
 # 🚀 GethonisAIApi
 ### API endpoint that merges outputs from two language models, applies response optimization, and returns the most suitable result.
 
-## 📸 2. Screenshots / Diagram
+## 📚 Table of Contents
+
+1. [Screenshots / Diagram](#-1-screenshots--diagram)
+2. [Overview](#-2-overview--introduction)
+3. [Features](#-3-features)
+4. [Tech Stack](#-4-tech-stack)
+5. [Project Structure](#-5-project-structure)
+6. [Getting Started](#-6-getting-started)
+7. [Installation](#-7-authentication)
+8. [Authentication](#-8-authentication)
+9. [Example Usage](#-9-example-usage)
+10. [API Documentation](#-10-api-documentation)
+11. [Testing & CI/CD](#-11-testing--cicd)
+12. [Performance & Benchmarks](#-12-future-features)
+13. [Future Features](#%EF%B8%8F-13-contributing)
+14. [Contributing](#-14-contributing)
+15. [Contact](#-15-contact)
+
+## 📸 1. Screenshots / Diagram
 ![MainPage](app/static/gethonismain.png)
 
 ![LogicDiagram](app/static/logicdiagram.png)
 
-## 🧠 3. Overview / Introduction
+## 🧠 2. Overview / Introduction
 Gethonis is a Python FastAPI-powered API designed to combine responses from two AI models, OpenAI and Grok, and to return the best optimised answer. The API was implemented in a Python Based web service and across two discord chatbots. 
 **Target Users** 
 AI developers and enterprises seeking to leverage multiple AI engines through a single, scalable interface.
@@ -22,15 +40,15 @@ AI developers and enterprises seeking to leverage multiple AI engines through a 
 * Security & UX, Secured API endpoints with clear request/response schemas and error handling.
 * Developer experience, Fully typed Python code, automated CI/CD pipelines via GitHub Actions for testing, linting, and deployment.
 
-## ✨ 4. Features
-* Combines ourput from two AI models and returns the most suitable response.
-* Supports two AI engines widh modular backend design
+## ✨ 3. Features
+* Combines output from two AI models and returns the most suitable response.
+* Supports two AI engines with modular backend design
 * Containerised with Docker for consistent deployment
 * CI/CD integraiton with Github Actions for smooth dev workflow
-* Hosted on a scalable Hetzner virtual cloud server
+* Hosted on a scalable Hetzner Cloud Server
 * Secured, validated API requests and typed responses for reliability
 
-## 🧰 5. Tech Stack
+## 🧰 4. Tech Stack
 
 | Layer | Technologies Used | 
 | -------- | -------- |
@@ -41,7 +59,7 @@ AI developers and enterprises seeking to leverage multiple AI engines through a 
 | CI/CD     | Github Actions Workflow    |
 
 
-## 📂 6. Project Structure
+## 📂 5. Project Structure
 ```
 gethonis/
 ├── app/
@@ -66,12 +84,12 @@ gethonis/
 ├── tests/               	# Unit and integration tests
 └── README.md
 ```
-## 🚀 7. Getting Started
+## 🚀 6. Getting Started
 **Prerequisites:**
 * Python 3.8+
 * Docker
 
-### 🛠 Installation
+### 🛠 7. Installation
 ```bash
 git clone https://github.com/lucian-xinitrc/GethonisAIApi.git 
 cd GethonisAIApi
@@ -107,19 +125,19 @@ print(bot.get_message(message))
 |Throughput | 800+ req/sec |
 |Memory Usage | <150 MB
 
-## 💡 14. Future Features
+## 💡 13. Future Features
 * Adding Redis aching layer for response speedup
-* More advanced Unit Testing
+* Expand test coverage
 * Monitoring integration with Prometheus and Grafana
 * Enhancing more advanced 
 
-## 🙋‍♂️ 15. Contributing
+## 🙋‍♂️ 14. Contributing
 1. Fork the repo
 2. Create feature branch: `git checkout -b feature/AmazingFeature`
 3. Commit changes and push
 4. Open a Pull Request for review
 
-## 📫 17. Contact
+## 📫 15. Contact
 Name: Lucian-Florin Cusmir
 
 Github: github.com/lucian-xinitrc
