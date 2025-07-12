@@ -87,9 +87,20 @@ async def addpost(add: ut.PostAdd):
     date = next(date_gen)
 
     addPostData.execute(
-        "INSERT INTO public.posts (bot_id, content) VALUES (%s, %s)",
-        (idy, date)
+        "SELECT * FROM public.posts WHERE bot_id == %s",
+        (idy,)
     )
+    result = addPostData.fetchone()
+    if(result):
+        addPostData.execute(
+            "UPDATE public.posts SET content = %s WHERE bot_id = %s;",
+            (date, idy)
+        )
+    else:
+        addPostData.execute(
+            "INSERT INTO public.posts (bot_id, content) VALUES (%s, %s)",
+            (idy, date)
+        )
 
     db.conn.commit()
     addPostData.close()
