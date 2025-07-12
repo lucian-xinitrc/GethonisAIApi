@@ -25,11 +25,15 @@ AI developers and enterprises seeking to leverage multiple AI engines through a 
 * Secured, validated API requests and typed responses for reliability
 
 ## 🧰 5. Tech Stack
-* Backend Python   FastAPI
-* AI Models  OpenAI, Grok
-* Deployment   Docker, Hetzner Cloud, Github Actions
-* Testing   Pytest
-* CI/CD    Github Actions Workflow
+
+| Layer | Technologies Used | 
+| -------- | -------- |
+| Backend     | Python, FastAPI     |
+| AI Models     | OpenAI, Grok     |
+| Deployment    | Docker, Hetzner Cloud, Github Actions    |
+| Testing     | Pytest     |
+| CI/CD     | Github Actions Workflow    |
+
 
 ## 📂 6. Project Structure
 ```
@@ -91,9 +95,11 @@ print(bot.get_message(message))
 * CI/CD pipeline runs linting, tests, and builds Docker images automatically on Github Actions
 
 ## 📈 12. Performance & Benchmarks
-Average Response time ~40 ms
-Throughput 800+ req/sec
-Memory Usage < 150 MB
+| Metric | Value | 
+| -------- | -------- |
+| Average Response time     | ~40 ms     |
+|Throughput | 800+ req/sec |
+|Memory Usage | <150 MB
 
 ## 💡 14. Roadmap or Future Features
 * Adding Redis aching layer for response speedup
