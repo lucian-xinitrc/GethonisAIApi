@@ -63,7 +63,7 @@ gethonis/
 │   ├── Dockerfile              
 │   ├── main.py                 # FastAPI entrypoint connected to api/routes.py clean integration
 │   ├── requirements.txt
-├── tests/               # Unit and integration tests
+├── tests/               		# Unit and integration tests
 └── README.md
 ```
 ## 🚀 7. Getting Started
