@@ -87,7 +87,7 @@ async def addpost(add: ut.PostAdd):
     date = next(date_gen)
 
     addPostData.execute(
-        "INSERT INTO public.posts (id, Data) VALUES (%s, %s)",
+        "INSERT INTO public.posts (id, content) VALUES (%s, %s)",
         (idy, date)
     )
 
