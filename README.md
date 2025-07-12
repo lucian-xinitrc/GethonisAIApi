@@ -4,7 +4,8 @@
 ## 🧠 3. Overview / Introduction
 Gethonis is a Python FastAPI-powered API designed to combine responses from two AI models, OpenAI and Grok, and to return the best optimised answer. The API was implemented in a Python Based web service and across two discord chatbots. 
 **Target Users** 
-AI developers and enterprises seeking to leverage multiple AI engines through a single, scalable interface. 
+AI developers and enterprises seeking to leverage multiple AI engines through a single, scalable interface.
+
 **What problems solves?**
 * Eliminates reliance on a single AI model by fusing multi-model outputs.
 * Enhances response quality via automated correction and optimisation.
@@ -101,7 +102,7 @@ print(bot.get_message(message))
 |Throughput | 800+ req/sec |
 |Memory Usage | <150 MB
 
-## 💡 14. Roadmap or Future Features
+## 💡 14. Future Features
 * Adding Redis aching layer for response speedup
 * More advanced Unit Testing
 * Monitoring integration with Prometheus and Grafana
