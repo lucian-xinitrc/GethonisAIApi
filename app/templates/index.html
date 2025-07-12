@@ -30,7 +30,7 @@
             <script>
                 async function generateToken() {
                     try {
-                        const response = await fetch('/ff12f222abd65e100890215af94c2d02');
+                        const response = await fetch('/genToken');
                         const data = await response.json();
                         document.getElementById('tokenOutput').textContent = data.token;
                     } catch (error) {

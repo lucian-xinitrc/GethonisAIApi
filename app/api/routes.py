@@ -21,20 +21,8 @@ templates = Jinja2Templates(directory="templates")
 def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# Help README.md displayer
-@router.get("/help", response_class=HTMLResponse)
-def custom_docs(request: Request):
-    with open("docs/README.md", "r") as f:
-        content = f.read()
-    html_content = markdown.markdown(content, extensions=["fenced_code", "tables"])
-    return templates.TemplateResponse("help.html", {
-        "request": request,
-        "html_content": html_content
-    })
-
-
 # The route get route that generates the API Key
-@router.get("/ff12f222abd65e100890215af94c2d02")
+@router.get("/genToken")
 def generatetoken():
     load_dotenv()
     db = Authentication()
