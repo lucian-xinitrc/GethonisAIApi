@@ -78,12 +78,12 @@ async def addpost(add: ut.PostAdd):
     token = add.headers
     idy = add.id
     prompty = add.prompt
+    date_gen = ut.post_returning(token, "", prompty, 1)
 
     db = Authentication()
     db.check_auth(token)
     addPostData = db.conn.cursor()
 
-    date_gen = ut.post_returning(token, "", prompty, 1)
     date = next(date_gen)
 
     addPostData.execute(
