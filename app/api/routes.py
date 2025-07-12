@@ -103,7 +103,7 @@ def response_openai(action: ut.Message):
 		return ut.streaming(token, message, "text/plain", 2)
 	return ut.non_streaming(token, message, "text/plain", 2)
 
-@router.post("/api/deepseek")
+@router.post("/api/grok")
 def response_deepseek(action: ut.Message):
 	token = action.headers
 	message = action.messages

@@ -1,6 +1,11 @@
 # 🚀 GethonisAIApi
 ### API endpoint that merges outputs from two language models, applies response optimization, and returns the most suitable result.
 
+## 📸 2. Live Demo / Screenshots / Video
+![MainPage](app/static/gethonismainpage.png)
+
+![LogicDiagram](app/static/logicdiagram.png)
+
 ## 🧠 3. Overview / Introduction
 Gethonis is a Python FastAPI-powered API designed to combine responses from two AI models, OpenAI and Grok, and to return the best optimised answer. The API was implemented in a Python Based web service and across two discord chatbots. 
 **Target Users** 
