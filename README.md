@@ -61,7 +61,7 @@ gethonis/
 └── README.md
 ```
 ## 🚀 7. Getting Started
-** Prerequisites:
+**Prerequisites:**
 * Python 3.8+
 * Docker
 
@@ -115,5 +115,7 @@ print(bot.get_message(message))
 
 ## 📫 17. Contact
 Name: Lucian-Florin Cusmir
+
 Github: github.com/lucian-xinitrc
+
 Email: cusmirlucian@gmail.com
