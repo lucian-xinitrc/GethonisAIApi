@@ -15,8 +15,8 @@
 10. [API Documentation](#-10-api-documentation)
 11. [Testing & CI/CD](#-11-testing--cicd)
 12. [Performance & Benchmarks](#-12-future-features)
-13. [Future Features](#%EF%B8%8F-13-contributing)
-14. [Contributing](#-14-contributing)
+13. [Future Features](#-13-future-features)
+14. [Contributing](#%EF%B8%8F-13-contributing)
 15. [Contact](#-15-contact)
 
 ## 📸 1. Screenshots / Diagram
