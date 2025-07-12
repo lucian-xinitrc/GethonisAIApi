@@ -87,7 +87,7 @@ async def addpost(add: ut.PostAdd):
     date = next(date_gen)
 
     addPostData.execute(
-        "SELECT * FROM public.posts WHERE bot_id == %s",
+        "SELECT * FROM public.posts WHERE bot_id = %s",
         (idy,)
     )
     result = addPostData.fetchone()
