@@ -63,7 +63,7 @@ gethonis/
 │   ├── Dockerfile              
 │   ├── main.py                 # FastAPI entrypoint connected to api/routes.py clean integration
 │   ├── requirements.txt
-├── tests/               		# Unit and integration tests
+├── tests/               	# Unit and integration tests
 └── README.md
 ```
 ## 🚀 7. Getting Started
@@ -79,7 +79,7 @@ docker build --no-cache -t gethonisapi .
 docker run -d -p 8000:8000 --restart unless-stopped --name gethonis-api gethonisapi
 ```
 ## 🔐 8. Authentication
-1. Generate token on gethonis.com
+1. Generate token on [gethonis.com](https://gethonis.com)
 2. Add headers in json and 'token'
 
 ## 📬 9. Example Usage
