@@ -70,8 +70,25 @@ def get_post(postc: ut.PostContent):
 @router.post("/api/checkpost")
 def checkpost(check: ut.PostVerify):
     token = check.headers
-    id = check.id
-    return ut.checkPost(token, id)
+    idy = check.id
+
+    db = Authentication()
+    db.check_auth(token)
+    checkPostData = db.conn.cursor()
+
+    checkPostData.execute(
+        "SELECT content FROM public.posts WHERE bot_id = %s",
+        (idy,)
+    )
+    result = checkPostData.fetchone()
+    if result:
+        checkPostData.execute(
+            DELETE FROM public.posts WHERE bot_id = %s",
+            (idy,)
+        )
+        return result[0].json
+    else:
+        return {'Status': "No posts yet."}
 
 @router.post("/api/addpost")
 async def addpost(add: ut.PostAdd):
