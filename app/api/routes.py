@@ -86,7 +86,7 @@ def checkpost(check: ut.PostVerify):
             "DELETE FROM public.posts WHERE bot_id = %s",
             (idy,)
         )
-        return result.json
+        return result
     else:
         return {'Status': "No posts yet."}
 
