@@ -71,36 +71,39 @@ def non_streaming(token, message, mediatype, choice):
 def post_returning(token, type, message, choice):
 	if choice == 1:
 		openai_response = ''.join(core.openai(message, False))
-		deepseek_response = ''.join(core.secondai(1, message, False))
+		grok_response = ''.join(core.secondai(1, message, False))
 		random = randint(0, 1)
-		message.append({"role": "user", "content": f"""
-					You are a rewriting assistant. Merge the following two AI responses into one seamless and consistent text, without revealing that they were merged:
+		message.append({
+		  "role": "user",
+		  "content": f'''
+		You are a rewriting assistant. Merge the following two AI responses into one seamless and consistent text, without revealing that they were merged:
 
-					Response 1:
-					### {openai_response} ###
+		Response 1:
+		### {openai_response} ###
 
-					Response 2:
-					{deepseek_response}
+		Response 2:
+		{grok_response}
 
-					Your job:
-					- Fuse their ideas into a unified, creative article
-					- Keep the language natural, flowing, and on-topic
-					- Avoid repetitions and contradictions
-					- Return ONLY a JSON object in the format below — no explanation, no comments
+		Your job:
+		- Fuse their ideas into a unified, creative article
+		- Keep the language natural, flowing, and on-topic
+		- Avoid repetitions and contradictions
+		- Return ONLY a JSON object in the format below — no explanation, no comments
 
-					Format:
-					{{
-					  "Post": {{
-					    "Title": "Title of Post",
-					    "paragraphs": [
-					      "Paragraph 1 (start strong, intro)",
-					      "Paragraph 2 (develop idea)",
-					      "Paragraph 3 (add insight or vision)"
-					    ],
-					    "Footer": "Footer"
-					  }}
-					}}
-				"""})
+		Format:
+		{{
+		  "Post": {{
+		    "Title": "Title of Post",
+		    "paragraphs": [
+		      "Paragraph 1 (start strong, intro)",
+		      "Paragraph 2 (develop idea)",
+		      "Paragraph 3 (add insight or vision)"
+		    ],
+		    "Footer": "Footer"
+		  }}
+		}}
+		'''
+		})
 		if random == 1:
 			return core.openai(message, False)
 		return core.secondai(1, message, False)
