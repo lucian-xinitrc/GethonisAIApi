@@ -88,7 +88,7 @@ def post_returning(token, type, message, choice):
 		- Fuse their ideas into a unified, creative article
 		- Keep the language natural, flowing, and on-topic
 		- Avoid repetitions and contradictions
-		- Return ONLY a JSON object in the format below — no explanation, no comments
+		- Return ONLY a JSON object in the format below no explanation, no comments, and please keep markdown only in title paragraphs no ['```json ```']
 
 		Format:
 		{{
