@@ -83,7 +83,7 @@ def checkpost(check: ut.PostVerify):
     result = checkPostData.fetchone()
     if result:
         checkPostData.execute(
-            DELETE FROM public.posts WHERE bot_id = %s",
+            "DELETE FROM public.posts WHERE bot_id = %s",
             (idy,)
         )
         return result[0].json
