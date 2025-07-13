@@ -86,6 +86,8 @@ def checkpost(check: ut.PostVerify):
             "DELETE FROM public.posts WHERE bot_id = %s",
             (idy,)
         )
+        db.conn.commit()
+        checkPostData.close()
         return result
     else:
         return {'Status': "No posts yet."}
