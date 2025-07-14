@@ -44,7 +44,7 @@ AI developers and enterprises seeking to leverage multiple AI engines through a 
 * Combines output from two AI models and returns the most suitable response.
 * Supports two AI engines with modular backend design
 * Containerised with Docker for consistent deployment
-* CI/CD integraiton with Github Actions for smooth dev workflow
+* CI/CD integration with Github Actions for smooth dev workflow
 * Hosted on a scalable Hetzner Cloud Server
 * Secured, validated API requests and typed responses for reliability
 
