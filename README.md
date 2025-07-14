@@ -105,7 +105,7 @@ docker run -d -p 8000:8000 --restart unless-stopped --name gethonis-api gethonis
 import gethonis as geth
 
 bot = geth.Gethonis("geth-...", "baseurl")
-message = "Test Meessage"
+message = "Test Message"
 bot.set_message("gethonis", False)
 print(bot.get_message(message))
 ```
@@ -126,10 +126,9 @@ print(bot.get_message(message))
 |Memory Usage | <150 MB
 
 ## 💡 13. Future Features
-* Adding Redis aching layer for response speedup
+* Adding Redis caching layer for response speedup
 * Expand test coverage
 * Monitoring integration with Prometheus and Grafana
-* Enhancing more advanced 
 
 ## 🙋‍♂️ 14. Contributing
 1. Fork the repo
