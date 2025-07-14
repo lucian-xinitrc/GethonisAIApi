@@ -89,7 +89,7 @@ gethonis/
 * Python 3.8+
 * Docker
 
-### 🛠 7. Installation
+## 🛠 7. Installation
 ```bash
 git clone https://github.com/lucian-xinitrc/GethonisAIApi.git 
 cd GethonisAIApi
