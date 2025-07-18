@@ -68,7 +68,7 @@ def get_post(postc: ut.PostContent):
     return ut.post_returning(token, type, message, 1)
 
 @router.post("/api/checkpost")
-def checkpost(check: ut.PostVerify):
+def check_post(check: ut.PostVerify):
     token = check.headers
     idy = check.id
 
@@ -93,7 +93,7 @@ def checkpost(check: ut.PostVerify):
         return {'Status': "No posts yet."}
 
 @router.post("/api/addpost")
-async def addpost(add: ut.PostAdd):
+async def add_post(add: ut.PostAdd):
     token = add.headers
     idy = add.id
     prompty = add.prompt
@@ -134,9 +134,18 @@ def response_openai(action: ut.Message):
 	return ut.non_streaming(token, message, "text/plain", 2)
 
 @router.post("/api/grok")
-def response_deepseek(action: ut.Message):
+def response_grok(action: ut.Message):
 	token = action.headers
 	message = action.messages
 	if action.stream:
 		return ut.streaming(token, message, "text/plain", 3)
 	return ut.non_streaming(token, message, "text/plain", 3)
+
+@router.post("/api/deepseek"):
+def response_deepseek(action: ut.Message):
+    token = action.headers
+    message = action.messages
+    if action.stream:
+        return ut.streaming(token, message, "text/plain", 4)
+    return ut.non_streaming(token, message, "text/plain", 4)
+

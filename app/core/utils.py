@@ -34,9 +34,10 @@ def streaming(token, message, mediatype, choice):
 	if conn.auth:
 		if choice == 1: 
 			openai_response = ''.join(core.openai(message, False))
-			deepseek_response = ''.join(core.secondai(1, message, False))
+			grok_response = ''.join(core.secondai(1, message, False))
 			random = randint(0, 1)
-			message.append({"role": "user", "content": f"Analyze those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {deepseek_response}"})
+			message.append({"role": "user", "content": f"""Analyze those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {grok_response}
+			"""})
 			if random == 1:
 				return StreamingResponse(core.openai(message, True), media_type=mediatype)
 			return StreamingResponse(core.secondai(2, message, True), media_type=mediatype)
@@ -45,7 +46,10 @@ def streaming(token, message, mediatype, choice):
 				return StreamingResponse(core.openai(message, True), media_type=mediatype)
 			else:
 				if choice == 3:
-					return StreamingResponse(core.secondai(2, message, True), media_type=mediatype)
+					return StreamingResponse(core.secondai(1, message, True), media_type=mediatype)
+				else:
+					if choice == 4:
+						return StreamingResponse(core.secondai(2, message, False), media_type=mediatype)
 	return "Unfortunately you don't have permission"
 
 def non_streaming(token, message, mediatype, choice):
@@ -54,9 +58,9 @@ def non_streaming(token, message, mediatype, choice):
 	if conn.auth:
 		if choice == 1:
 			openai_response = ''.join(core.openai(message, False))
-			deepseek_response = ''.join(core.secondai(1, message, False))
+			grok_response = ''.join(core.secondai(1, message, False))
 			random = randint(0, 1)
-			message.append({"role": "user", "content": f"Analyze those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {deepseek_response}"})
+			message.append({"role": "user", "content": f"Analyze those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {grok_response}"})
 			if random == 1:
 				return core.openai(message, False)
 			return core.secondai(1, message, False)
@@ -66,6 +70,9 @@ def non_streaming(token, message, mediatype, choice):
 			else:
 				if choice == 3:
 					return core.secondai(1, message, False)
+				else:
+					if choice == 4:
+						return core.secondai(2, message, False)
 	return "Unfortunately you don't have permission"
 
 def post_returning(token, type, message, choice):
