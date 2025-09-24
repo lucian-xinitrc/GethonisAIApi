@@ -28,7 +28,7 @@ class PostVerify(BaseModel):
 	headers: str
 	id: str
 
-class PostVerify(BaseModel):
+class ArduinoTemp(BaseModel):
 	temp: str
 	humi: str
 
