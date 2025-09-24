@@ -21,6 +21,12 @@ templates = Jinja2Templates(directory="templates")
 def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@router.post("/arduino")
+def arduino(ardu: ut.ArduinoTemp):
+    temp = ardu.temp
+    humi = ardu.humi
+    return {"status": f"received {temp}"}
+
 # The route get route that generates the API Key
 @router.get("/genToken")
 def generatetoken():

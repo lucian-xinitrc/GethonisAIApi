@@ -28,6 +28,10 @@ class PostVerify(BaseModel):
 	headers: str
 	id: str
 
+class PostVerify(BaseModel):
+	temp: str
+	humi: str
+
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
 	conn.check_auth(token)
