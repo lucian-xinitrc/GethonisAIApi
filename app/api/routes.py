@@ -50,10 +50,11 @@ def temp():
     insert_query = """
         SELECT temp, humi
         FROM temphumi
-        WHERE id=1
+        WHERE id=%s
     """
     try:
-        cursor.execute(insert_query)
+        data = (1,)
+        cursor.execute(insert_query, data)
         result = cursor.fetchone()
         if result: 
             temp, humi = result
@@ -63,7 +64,7 @@ def temp():
             return {"status": "error"}
     except Exception as e:
         return {"status": str(e)}
-        
+
 # The route get route that generates the API Key
 @router.get("/genToken")
 def generatetoken():
