@@ -25,7 +25,19 @@ def custom_docs(request: Request):
 def arduino(ardu: ut.ArduinoTemp):
     temp = ardu.temp
     humi = ardu.humi
-    return {"status": f"received {temp}"}
+    load_dotenv()
+    db = Authentication()
+    cursor = db.conn.cursor()
+    insert_query = """
+        UPDATE temphumi SET temp = %s, humi %s WHERE id = 1
+    """
+    try:
+        data = (temp, humi)
+        cursor.execute(insert_query, data)
+        db.conn.commit()
+        return {"status": "Succesfully sent!"}
+    except Exception as e:
+        return {"status": str(e)}
 
 # The route get route that generates the API Key
 @router.get("/genToken")
