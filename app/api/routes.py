@@ -29,7 +29,10 @@ def arduino(ardu: ut.ArduinoTemp):
     db = Authentication()
     cursor = db.conn.cursor()
     insert_query = """
-        UPDATE temphumi SET temp = %s, humi %s WHERE id = 1
+        UPDATE temphumi
+        SET temp = %s,
+            humi = %s
+        WHERE id = 1
     """
     try:
         data = (temp, humi)
