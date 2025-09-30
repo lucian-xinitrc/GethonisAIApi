@@ -42,6 +42,28 @@ def arduino(ardu: ut.ArduinoTemp):
     except Exception as e:
         return {"status": str(e)}
 
+@router.get("/temp")
+def temp():
+    load_dotenv()
+    db = Authentication()
+    cursor = db.conn.cursor()
+    insert_query = """
+        SELECT temp, humi
+        FROM temphumi
+        WHERE id=1
+    """
+    try:
+        cursor.execute(insert_query)
+        result = cursor.fetchone()
+        if result: 
+            temp, humi = result
+            db.conn.commit()
+            return {"status": "Success", "temp": temp, "humi": humi}
+        else 
+            return {"status": "error"}
+    except Exception as e:
+        return {"status": str(e)}
+        
 # The route get route that generates the API Key
 @router.get("/genToken")
 def generatetoken():
