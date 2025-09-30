@@ -60,7 +60,7 @@ def temp():
             temp, humi = result
             db.conn.commit()
             return {"status": "Success", "temp": temp, "humi": humi}
-        else 
+        else :
             return {"status": "error"}
     except Exception as e:
         return {"status": str(e)}
