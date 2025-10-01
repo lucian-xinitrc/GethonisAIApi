@@ -11,6 +11,9 @@ class Message(BaseModel):
 	messages: List[Dict]
 	stream: bool
 
+class Verf(BaseModel):
+	token: str
+
 class Try(BaseModel):
 	token: str
 
