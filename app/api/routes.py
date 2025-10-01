@@ -29,7 +29,7 @@ def dates(info: ut.Verf):
         db = Authentication()
         cursor = db.conn.cursor()
         query = """
-            SELECT friday, saturday, sunday, monday, extra
+            SELECT friday, saturday, sunday, monday, extra, extrafri, extrasat, extrasan, extramon
             FROM bubusbirth
             WHERE id=%s
         """
@@ -38,9 +38,9 @@ def dates(info: ut.Verf):
             cursor.execute(query, data)
             result = cursor.fetchone()
             if result: 
-                friday, saturday, sunday, monday, extra = result
+                friday, saturday, sunday, monday, extra, extrasat, extrasan, extramon = result
                 db.conn.commit()
-                return {"status": "Success", "friday": friday, "saturday": saturday, "sunday": sunday, "monday": monday, "extra": extra}
+                return {"status": "Success", "friday": friday, "saturday": saturday, "sunday": sunday, "monday": monday, "extra": extra, "extrafri": extrafri, "extrasat": extrasat, "extrasan": extrasan, "extramon": extramon}
             else :
                 return {"status": "error"}
         except Exception as e:
