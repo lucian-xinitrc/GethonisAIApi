@@ -38,7 +38,7 @@ def dates(info: ut.Verf):
             cursor.execute(query, data)
             result = cursor.fetchone()
             if result: 
-                friday, saturday, sunday, monday, extra, extrasat, extrasan, extramon = result
+                friday, saturday, sunday, monday, extra, extrafri, extrasat, extrasan, extramon = result
                 db.conn.commit()
                 return {"status": "Success", "friday": friday, "saturday": saturday, "sunday": sunday, "monday": monday, "extra": extra, "extrafri": extrafri, "extrasat": extrasat, "extrasan": extrasan, "extramon": extramon}
             else :
