@@ -185,11 +185,3 @@ def response_grok(action: ut.Message):
 		return ut.streaming(token, message, "text/plain", 3)
 	return ut.non_streaming(token, message, "text/plain", 3)
 
-@router.post("/api/deepseek")
-def response_deepseek(action: ut.Message):
-    token = action.headers
-    message = action.messages
-    if action.stream:
-        return ut.streaming(token, message, "text/plain", 4)
-    return ut.non_streaming(token, message, "text/plain", 4)
-
