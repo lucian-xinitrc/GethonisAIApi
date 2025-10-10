@@ -21,6 +21,34 @@ templates = Jinja2Templates(directory="templates")
 def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@router.post("/dates")
+def dates(info: ut.Verf):
+    token = info.token
+    if(token == "12021908"):
+        load_dotenv()
+        db = Authentication()
+        cursor = db.conn.cursor()
+        query = """
+            SELECT friday, saturday, sunday, monday, extra, extrafri, extrasat, extrasan, extramon
+            FROM bubusbirth
+            WHERE id=%s
+        """
+        try:
+            data = (1,)
+            cursor.execute(query, data)
+            result = cursor.fetchone()
+            if result: 
+                friday, saturday, sunday, monday, extra, extrafri, extrasat, extrasan, extramon = result
+                db.conn.commit()
+                return {"status": "Success", "friday": friday, "saturday": saturday, "sunday": sunday, "monday": monday, "extra": extra, "extrafri": extrafri, "extrasat": extrasat, "extrasan": extrasan, "extramon": extramon}
+            else :
+                return {"status": "error"}
+        except Exception as e:
+            return {"status": str(e)}
+    else:
+        return {"status": str(e)}
+
+
 @router.post("/arduino")
 def arduino(ardu: ut.ArduinoTemp):
     temp = ardu.temp
