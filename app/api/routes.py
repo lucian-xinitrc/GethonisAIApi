@@ -70,6 +70,28 @@ def arduino(ardu: ut.ArduinoTemp):
     except Exception as e:
         return {"status": str(e)}
 
+@router.post("/arduinobubu")
+def arduino(ardu: ut.ArduinoTemp):
+    temp = ardu.temp
+    humi = ardu.humi
+    load_dotenv()
+    db = Authentication()
+    cursor = db.conn.cursor()
+    insert_query = """
+        UPDATE temphumi
+        SET temp = %s,
+            humi = %s
+        WHERE id = 2
+    """
+    try:
+        data = (temp, humi)
+        cursor.execute(insert_query, data)
+        db.conn.commit()
+        return {"status": "Succesfully sent!"}
+    except Exception as e:
+        return {"status": str(e)}
+
+
 @router.get("/temp")
 def temp():
     load_dotenv()
