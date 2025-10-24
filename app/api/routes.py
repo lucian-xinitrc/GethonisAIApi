@@ -93,6 +93,29 @@ def temp():
     except Exception as e:
         return {"status": str(e)}
 
+@router.get("/tempbubu")
+def temp():
+    load_dotenv()
+    db = Authentication()
+    cursor = db.conn.cursor()
+    insert_query = """
+        SELECT temp, humi
+        FROM temphumi
+        WHERE id=%s
+    """
+    try:
+        data = (2,)
+        cursor.execute(insert_query, data)
+        result = cursor.fetchone()
+        if result: 
+            temp, humi = result
+            db.conn.commit()
+            return {"status": "Success", "temp": temp, "humi": humi}
+        else :
+            return {"status": "error"}
+    except Exception as e:
+        return {"status": str(e)}
+
 # The route get route that generates the API Key
 @router.get("/genToken")
 def generatetoken():

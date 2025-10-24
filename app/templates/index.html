@@ -18,26 +18,14 @@
             </section>
             <section class="main">
                 <section class="list white-text">
-                    <p>Token: </p>
-                    <pre id="tokenOutput"></pre>
+                    <p>For token contact me on:</p>
                 </section>   
             </section>
             <section class="main">
                 <section class="list">
-                    <button class="Link" onclick="generateToken()">Generate Token</button>
+                    <button class="Link" disabled>cusmirlucian@gmail.com</button>
                 </section>
             </section>
-            <script>
-                async function generateToken() {
-                    try {
-                        const response = await fetch('/genToken');
-                        const data = await response.json();
-                        document.getElementById('tokenOutput').textContent = data.token;
-                    } catch (error) {
-                        document.getElementById('tokenOutput').textContent = 'Eroare: ' + error;
-                    }
-                }
-            </script>
         </header>
     </body> 
 </html>
