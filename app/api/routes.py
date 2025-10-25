@@ -9,10 +9,11 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, APIRouter, Request
 from fastapi.responses import StreamingResponse, HTMLResponse
-
+from fastapi.responses import PlainTextResponse
+from prometheus_client import Counter, generate_latest
 # Router initialiser
 router = APIRouter()
-
+REQUEST_COUNT = Counter('api_requests_total', 'Total API requests')
 # Initialising directory ( the dir were the html files will be)
 templates = Jinja2Templates(directory="templates")
 
@@ -20,6 +21,10 @@ templates = Jinja2Templates(directory="templates")
 @router.get("/")
 def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@router.get("/metrics")
+def metrics():
+    return PlainTextResponse(generate_latest())
 
 @router.post("/dates")
 def dates(info: ut.Verf):

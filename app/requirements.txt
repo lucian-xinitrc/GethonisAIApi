@@ -8,3 +8,4 @@ uvicorn
 PyJWT
 markdown
 jinja2
+prometheus_client
