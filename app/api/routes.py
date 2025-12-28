@@ -22,10 +22,6 @@ templates = Jinja2Templates(directory="templates")
 def custom_docs(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@router.get("/metrics")
-def metrics():
-    return PlainTextResponse(generate_latest())
-
 @router.post("/dates")
 def dates(info: ut.Verf):
     token = info.token
