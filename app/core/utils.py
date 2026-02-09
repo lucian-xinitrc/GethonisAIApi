@@ -84,6 +84,16 @@ def non_streaming(token, message, mediatype, choice):
 				else:
 					if choice == 4:
 						return core.secondai(2, message, False)
+					else:
+						if choice == 5:
+							openai_response = ''.join(core.openai(message, False))
+							grok_response = ''.join(core.secondai(1, message, False))
+							random = randint(0, 1)
+							message.append({"role": "user", "content": f"Analyze but also don't make it sound like a description, is a brainstorming debate those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {grok_response}"})
+							if random == 1:
+								return core.openai(message, False)
+							return core.secondai(1, message, False)
+
 	return "Unfortunately you don't have permission"
 
 def post_returning(token, type, message, choice):

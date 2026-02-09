@@ -178,6 +178,17 @@ def response_gethonis(action: ut.Message):
 		return ut.streaming(token, message, "text/plain", 1)
 	return ut.non_streaming(token, message, "text/plain", 1)
 
+@router.post("/api/gethonisDebate")
+def response_gethonis_debate(action: ut.Message):
+    if(action.messages != "" and action.header != ""):
+        token = action.headers
+        message = action.messages
+        if action.stream:
+            return ut.streaming(token, message, "text/plain", 5)
+        return ut.non_streaming(token, message, "text/plain", 5)
+    else:
+        return "The parameters cannot be empty!"
+
 @router.post("/api/post")
 def get_post(postc: ut.PostContent):
     token = postc.headers
