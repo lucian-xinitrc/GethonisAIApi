@@ -89,7 +89,7 @@ def non_streaming(token, message, mediatype, choice):
 							openai_response = ''.join(core.openai(message, False))
 							grok_response = ''.join(core.secondai(1, message, False))
 							random = randint(0, 1)
-							message.append({"role": "user", "content": f"Analyze (but also don't make it sound like a description, is a brainstorming debate) those messages and give the best version combined without letting the user to know that, here are the messages First Message: ### {openai_response} ### Second Response: {grok_response}"})
+							message.append({"role": "user", "content": f"IMPORTANT ONLY A SIMPLE MESSAGE USER MUST NOT SEE THE ANALISATION OR THE BOTH RESPONSES!!! Analyze (but also don't make it sound like a description, is a brainstorming debate) those messages and give the best version combined without letting the user to know that behave like a single response, the user must not know that you analyzed just give the perfect version, here are the messages First Message: ### {openai_response} ### Second Response: {grok_response}"})
 							if random == 1:
 								return core.openai(message, False)
 							return core.secondai(1, message, False)
