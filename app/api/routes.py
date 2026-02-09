@@ -180,7 +180,7 @@ def response_gethonis(action: ut.Message):
 
 @router.post("/api/gethonisDebate")
 def response_gethonis_debate(action: ut.Message):
-    if(action.messages != "" and action.header != ""):
+    if(action.messages != "" and action.headers != ""):
         token = action.headers
         message = action.messages
         if action.stream:
