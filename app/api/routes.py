@@ -58,7 +58,7 @@ def arduino(ardu: ut.ArduinoTemp):
     db = Authentication()
     cursor = db.conn.cursor()
     insert_query = """
-        UPDATE temphumi
+        UPDATE esp32sensorreceiver
         SET temp = %s,
             humi = %s
         WHERE id = 1
@@ -79,7 +79,7 @@ def arduino(ardu: ut.ArduinoTemp):
     db = Authentication()
     cursor = db.conn.cursor()
     insert_query = """
-        UPDATE temphumi
+        UPDATE esp32sensorreceiver
         SET temp = %s,
             humi = %s
         WHERE id = 2
@@ -100,7 +100,7 @@ def temp():
     cursor = db.conn.cursor()
     insert_query = """
         SELECT temp, humi
-        FROM temphumi
+        FROM esp32sensorreceiver
         WHERE id=%s
     """
     try:
@@ -123,7 +123,7 @@ def temp():
     cursor = db.conn.cursor()
     insert_query = """
         SELECT temp, humi
-        FROM temphumi
+        FROM esp32sensorreceiver
         WHERE id=%s
     """
     try:
