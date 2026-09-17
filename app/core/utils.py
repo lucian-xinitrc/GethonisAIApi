@@ -38,9 +38,6 @@ class ArduinoTemp(BaseModel):
 class Expenses(BaseModel):
 	token: str
 
-def secure(value):
-	if(value)
-
 def streaming(token, message, mediatype, choice):
 	conn = auth.Authentication()
 	conn.check_auth(token)
