@@ -20,7 +20,7 @@ templates = Jinja2Templates(directory="templates")
 # Main Page displayer
 @router.get("/")
 def custom_docs(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 @router.post("/dates")
 def dates(info: ut.Verf):
