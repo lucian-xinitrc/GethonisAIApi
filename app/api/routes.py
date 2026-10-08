@@ -402,7 +402,6 @@ def get_flipper_messages(
         rows = cursor.fetchall()
 
         messages = []
-
         for row in rows:
             try:
                 decrypted_content = fernet.decrypt(
