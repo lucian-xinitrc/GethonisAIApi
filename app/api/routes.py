@@ -11,6 +11,11 @@ from fastapi import FastAPI, APIRouter, Request
 from fastapi.responses import StreamingResponse, HTMLResponse
 from fastapi.responses import PlainTextResponse
 from prometheus_client import Counter, generate_latest
+import os
+from pydantic import BaseModel
+from fastapi import Query, Header, HTTPException
+from cryptography.fernet import Fernet, InvalidToken
+from dotenv import load_dotenv
 # Router initialiser
 router = APIRouter()
 REQUEST_COUNT = Counter('api_requests_total', 'Total API requests')
@@ -269,3 +274,162 @@ def response_grok(action: ut.Message):
 	if action.stream:
 		return ut.streaming(token, message, "text/plain", 3)
 	return ut.non_streaming(token, message, "text/plain", 3)
+
+load_dotenv()
+
+FLIPPER_API_TOKEN = os.getenv("FLIPPER_API_TOKEN")
+FLIPPER_MESSAGE_KEY = os.getenv("FLIPPER_MESSAGE_KEY")
+
+if not FLIPPER_API_TOKEN:
+    raise RuntimeError("FLIPPER_API_TOKEN is not configured")
+
+if not FLIPPER_MESSAGE_KEY:
+    raise RuntimeError("FLIPPER_MESSAGE_KEY is not configured")
+
+fernet = Fernet(FLIPPER_MESSAGE_KEY.encode())
+
+
+class FlipperMessage(BaseModel):
+    sender: str
+    content: str
+
+
+def check_flipper_token(token: str):
+    if token != FLIPPER_API_TOKEN:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid Flipper token"
+        )
+
+
+@router.post("/flipper/messages")
+def send_flipper_message(
+    message: FlipperMessage,
+    x_flipper_token: str = Header(default="")
+):
+    check_flipper_token(x_flipper_token)
+
+    content = message.content.strip()
+    sender = message.sender.strip()
+
+    if not content:
+        raise HTTPException(
+            status_code=400,
+            detail="Message cannot be empty"
+        )
+
+    if len(content) > 200:
+        raise HTTPException(
+            status_code=400,
+            detail="Message too long"
+        )
+
+    if len(sender) > 32:
+        raise HTTPException(
+            status_code=400,
+            detail="Sender too long"
+        )
+
+    encrypted_content = fernet.encrypt(
+        content.encode("utf-8")
+    ).decode("utf-8")
+
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        query = """
+            INSERT INTO public.flipper_messages
+            (sender, content)
+            VALUES (%s, %s)
+            RETURNING id, sender, created_at
+        """
+
+        cursor.execute(
+            query,
+            (sender, encrypted_content)
+        )
+
+        result = cursor.fetchone()
+
+        db.conn.commit()
+
+        return {
+            "status": "success",
+            "id": result[0],
+            "sender": result[1],
+            "created_at": result[2].isoformat()
+        }
+
+    except Exception as e:
+        db.conn.rollback()
+
+        return {
+            "status": "error",
+            "error": str(e)
+        }
+
+    finally:
+        cursor.close()
+        db.conn.close()
+
+
+@router.get("/flipper/messages")
+def get_flipper_messages(
+    after_id: int = Query(default=0, ge=0),
+    limit: int = Query(default=20, ge=1, le=50),
+    x_flipper_token: str = Header(default="")
+):
+    check_flipper_token(x_flipper_token)
+
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        query = """
+            SELECT id, sender, content, created_at
+            FROM public.flipper_messages
+            WHERE id > %s
+            ORDER BY id ASC
+            LIMIT %s
+        """
+
+        cursor.execute(
+            query,
+            (after_id, limit)
+        )
+
+        rows = cursor.fetchall()
+
+        messages = []
+
+        for row in rows:
+            try:
+                decrypted_content = fernet.decrypt(
+                    row[2].encode("utf-8")
+                ).decode("utf-8")
+            except InvalidToken:
+                decrypted_content = "[DECRYPTION ERROR]"
+
+            messages.append({
+                "id": row[0],
+                "sender": row[1],
+                "content": decrypted_content,
+                "created_at": row[3].isoformat()
+            })
+
+        return {
+            "status": "success",
+            "messages": messages
+        }
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e)
+        }
+
+    finally:
+        cursor.close()
+        db.conn.close()
+
