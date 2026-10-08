@@ -328,10 +328,6 @@ def send_flipper_message(
             detail="Sender too long"
         )
 
-    encrypted_content = fernet.encrypt(
-        content.encode("utf-8")
-    ).decode("utf-8")
-
     db = Authentication()
     cursor = db.conn.cursor()
 
@@ -340,12 +336,12 @@ def send_flipper_message(
             INSERT INTO public.flipper_messages
             (sender, content)
             VALUES (%s, %s)
-            RETURNING id, sender, created_at
+            RETURNING id, sender, content, created_at
         """
 
         cursor.execute(
             query,
-            (sender, encrypted_content)
+            (sender, content)
         )
 
         result = cursor.fetchone()
@@ -356,7 +352,8 @@ def send_flipper_message(
             "status": "success",
             "id": result[0],
             "sender": result[1],
-            "created_at": result[2].isoformat()
+            "content": result[2],
+            "created_at": result[3].isoformat()
         }
 
     except Exception as e:
@@ -400,18 +397,12 @@ def get_flipper_messages(
         rows = cursor.fetchall()
 
         messages = []
-        for row in rows:
-            try:
-                decrypted_content = fernet.decrypt(
-                    row[2].encode("utf-8")
-                ).decode("utf-8")
-            except InvalidToken:
-                decrypted_content = "[DECRYPTION ERROR]"
 
+        for row in rows:
             messages.append({
                 "id": row[0],
                 "sender": row[1],
-                "content": decrypted_content,
+                "content": row[2],
                 "created_at": row[3].isoformat()
             })
 
