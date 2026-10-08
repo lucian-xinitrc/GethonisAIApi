@@ -275,8 +275,6 @@ def response_grok(action: ut.Message):
 		return ut.streaming(token, message, "text/plain", 3)
 	return ut.non_streaming(token, message, "text/plain", 3)
 
-load_dotenv()
-
 FLIPPER_API_TOKEN = os.getenv("FLIPPER_API_TOKEN")
 FLIPPER_MESSAGE_KEY = os.getenv("FLIPPER_MESSAGE_KEY")
 
@@ -302,7 +300,7 @@ def check_flipper_token(token: str):
         )
 
 
-@router.post("/flipper/messages")
+@router.post("/messages")
 def send_flipper_message(
     message: FlipperMessage,
     x_flipper_token: str = Header(default="")
@@ -374,7 +372,7 @@ def send_flipper_message(
         db.conn.close()
 
 
-@router.get("/flipper/messages")
+@router.get("/messages")
 def get_flipper_messages(
     after_id: int = Query(default=0, ge=0),
     limit: int = Query(default=20, ge=1, le=50),
