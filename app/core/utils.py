@@ -4,12 +4,17 @@ from typing import List, Dict
 from random import randint
 from fastapi import FastAPI, APIRouter
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class Message(BaseModel):
 	headers: str
 	messages: List[Dict]
 	stream: bool
+
+class CustomColor(BaseModel):
+    red: int = Field(ge=0, le=255)
+    green: int = Field(ge=0, le=255)
+    blue: int = Field(ge=0, le=255)
 
 class Verf(BaseModel):
 	token: str

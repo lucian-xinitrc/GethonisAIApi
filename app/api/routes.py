@@ -96,7 +96,151 @@ def arduino(ardu: ut.ArduinoTemp):
         return {"status": "Succesfully sent!"}
     except Exception as e:
         return {"status": str(e)}
+@router.post("/customcolors")
+def update_custom_color(color: ut.CustomColor):
 
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        query = """
+            UPDATE customcolors
+            SET status = %s,
+                red = %s,
+                green = %s,
+                blue = %s
+            WHERE id = %s
+        """
+
+        cursor.execute(
+            query,
+            (
+                "on",
+                color.red,
+                color.green,
+                color.blue,
+                1202
+            )
+        )
+
+        db.conn.commit()
+
+        if cursor.rowcount == 0:
+            return {
+                "status": "error",
+                "message": "No custom color record found with ID 1202"
+            }
+
+        return {
+            "status": "success",
+            "message": "Custom color updated and tree turned ON",
+            "rgb": {
+                "red": color.red,
+                "green": color.green,
+                "blue": color.blue
+            }
+        }
+
+    except Exception as e:
+        db.conn.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+    finally:
+        cursor.close()
+        db.conn.close()
+
+@router.get("/treeup")
+def get_treeup():
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        cursor.execute("SELECT * FROM treeup")
+        rows = cursor.fetchall()
+
+        return {"data": rows}
+
+    finally:
+        cursor.close()
+        db.conn.close()
+
+@router.get("/treeupcustom")
+def get_treeupcustom():
+    db = Authentication()
+    cursor = db.conn.cursor()
+    
+    try:
+        cursor.execute("SELECT * FROM customcolors")
+        rows = cursor.fetchall()
+        
+        return {"data": rows}
+    finally:
+        cursor.close()
+        db.conn.close()
+
+@router.get("/treestop")
+def stop_tree():
+    load_dotenv()
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        query = """
+            UPDATE treeup
+            SET status = %s
+            WHERE id = %s
+        """
+        
+        cursor.execute(query, ("off", 1202))
+        
+        query_custom = """
+            UPDATE customcolors
+            SET status = %s
+            WHERE id = %s
+        """
+
+        cursor.execute(query_custom, ("off", 1202))
+        db.conn.commit()
+
+        return {
+            "status": "success",
+            "message": "Tree turned OFF"
+        }
+
+    except Exception as e:
+        db.conn.rollback()
+        return {"status": "error", "message": str(e)}
+
+    finally:
+        cursor.close()
+        db.conn.close()
+
+@router.post("/treeupon")
+def turn_tree_on():
+    db = Authentication()
+    cursor = db.conn.cursor()
+
+    try:
+        cursor.execute(
+            """
+            UPDATE treeup
+            SET status = %s
+            WHERE id = %s
+            """,
+            ("on", 1202)
+        )
+
+        db.conn.commit()
+
+        return {"status": "Tree turned ON successfully!"}
+
+    except Exception as e:
+        db.conn.rollback()
+        return {"error": str(e)}
+
+    finally:
+        cursor.close()
+        db.conn.close()
 
 @router.get("/temp")
 def temp():
