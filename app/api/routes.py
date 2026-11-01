@@ -16,6 +16,7 @@ from pydantic import BaseModel
 from fastapi import Query, Header, HTTPException
 from cryptography.fernet import Fernet, InvalidToken
 from dotenv import load_dotenv
+
 # Router initialiser
 router = APIRouter()
 REQUEST_COUNT = Counter('api_requests_total', 'Total API requests')
@@ -96,6 +97,90 @@ def arduino(ardu: ut.ArduinoTemp):
         return {"status": "Succesfully sent!"}
     except Exception as e:
         return {"status": str(e)}
+
+@router.post("/treeup")
+def turn_tree_on(tree: ut.TreeUp):
+    load_dotenv()
+    headers = tree.headers
+    type = tree.type
+    value = tree.value
+
+    if headers == os.getenv("API_TREE_TOKEN"):
+        db = Authentication()
+        cursor = db.conn.cursor()
+        if type == "check":
+            try:
+                cursor.execute("SELECT * FROM treeup")
+                rows = cursor.fetchall()
+                
+                return {"data": rows}
+            finally:
+                cursor.close()
+                db.conn.close()
+
+        elif type == "start":
+            try:
+                cursor.execute(
+                    """
+                    UPDATE treeup
+                    SET status = %s
+                    WHERE id = %s
+                    """,
+                    ("on", 1202)
+                )
+
+                db.conn.commit()
+
+                return {"status": "Tree turned ON successfully!"}
+
+            except Exception as e:
+                db.conn.rollback()
+                return {"error": str(e)}
+
+        elif type == "stop":
+            try:
+                query = """
+                    UPDATE treeup
+                    SET status = %s
+                    WHERE id = %s
+                """
+                
+                cursor.execute(query, ("off", 1202))
+                
+                query_custom = """
+                    UPDATE customcolors
+                    SET status = %s
+                    WHERE id = %s
+                """
+
+                cursor.execute(query_custom, ("off", 1202))
+                db.conn.commit()
+
+                return {
+                    "status": "success",
+                    "message": "Tree turned OFF"
+                }
+
+            except Exception as e:
+                db.conn.rollback()
+                return {"status": "error", "message": str(e)}
+
+        cursor.close()
+        db.conn.close()
+
+@router.get("/treeupcustom")
+def get_treeupcustom():
+    db = Authentication()
+    cursor = db.conn.cursor()
+    try:
+        cursor.execute("SELECT * FROM treeup")
+        rows = cursor.fetchall()
+                
+        return {"data": rows}
+    finally:
+        cursor.close()
+        db.conn.close()
+
 @router.post("/customcolors")
 def update_custom_color(color: ut.CustomColor):
 
@@ -144,99 +229,6 @@ def update_custom_color(color: ut.CustomColor):
     except Exception as e:
         db.conn.rollback()
         raise HTTPException(status_code=500, detail=str(e))
-
-    finally:
-        cursor.close()
-        db.conn.close()
-
-@router.get("/treeup")
-def get_treeup():
-    db = Authentication()
-    cursor = db.conn.cursor()
-
-    try:
-        cursor.execute("SELECT * FROM treeup")
-        rows = cursor.fetchall()
-
-        return {"data": rows}
-
-    finally:
-        cursor.close()
-        db.conn.close()
-
-@router.get("/treeupcustom")
-def get_treeupcustom():
-    db = Authentication()
-    cursor = db.conn.cursor()
-    
-    try:
-        cursor.execute("SELECT * FROM customcolors")
-        rows = cursor.fetchall()
-        
-        return {"data": rows}
-    finally:
-        cursor.close()
-        db.conn.close()
-
-@router.get("/treestop")
-def stop_tree():
-    load_dotenv()
-    db = Authentication()
-    cursor = db.conn.cursor()
-
-    try:
-        query = """
-            UPDATE treeup
-            SET status = %s
-            WHERE id = %s
-        """
-        
-        cursor.execute(query, ("off", 1202))
-        
-        query_custom = """
-            UPDATE customcolors
-            SET status = %s
-            WHERE id = %s
-        """
-
-        cursor.execute(query_custom, ("off", 1202))
-        db.conn.commit()
-
-        return {
-            "status": "success",
-            "message": "Tree turned OFF"
-        }
-
-    except Exception as e:
-        db.conn.rollback()
-        return {"status": "error", "message": str(e)}
-
-    finally:
-        cursor.close()
-        db.conn.close()
-
-@router.post("/treeupon")
-def turn_tree_on():
-    db = Authentication()
-    cursor = db.conn.cursor()
-
-    try:
-        cursor.execute(
-            """
-            UPDATE treeup
-            SET status = %s
-            WHERE id = %s
-            """,
-            ("on", 1202)
-        )
-
-        db.conn.commit()
-
-        return {"status": "Tree turned ON successfully!"}
-
-    except Exception as e:
-        db.conn.rollback()
-        return {"error": str(e)}
 
     finally:
         cursor.close()

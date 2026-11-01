@@ -16,6 +16,11 @@ class CustomColor(BaseModel):
     green: int = Field(ge=0, le=255)
     blue: int = Field(ge=0, le=255)
 
+class TreeUp(BaseModel):
+	headers: str
+	type: str
+	value: str 
+
 class Verf(BaseModel):
 	token: str
 
