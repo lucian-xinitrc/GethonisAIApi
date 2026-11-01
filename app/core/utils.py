@@ -12,6 +12,7 @@ class Message(BaseModel):
 	stream: bool
 
 class CustomColor(BaseModel):
+	headers: str
     red: int = Field(ge=0, le=255)
     green: int = Field(ge=0, le=255)
     blue: int = Field(ge=0, le=255)
@@ -19,7 +20,6 @@ class CustomColor(BaseModel):
 class TreeUp(BaseModel):
 	headers: str
 	type: str
-	value: str 
 
 class Verf(BaseModel):
 	token: str

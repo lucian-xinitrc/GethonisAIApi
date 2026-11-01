@@ -170,56 +170,54 @@ def turn_tree_on(tree: ut.TreeUp):
 
 @router.post("/customcolors")
 def update_custom_color(color: ut.CustomColor):
-
+    headers = color.headers
     db = Authentication()
     cursor = db.conn.cursor()
+    if headers == "12021908":
+        try:
+            query = """
+                UPDATE customcolors
+                SET status = %s,
+                    red = %s,
+                    green = %s,
+                    blue = %s
+                WHERE id = %s
+            """
 
-    try:
-        query = """
-            UPDATE customcolors
-            SET status = %s,
-                red = %s,
-                green = %s,
-                blue = %s
-            WHERE id = %s
-        """
-
-        cursor.execute(
-            query,
-            (
-                "on",
-                color.red,
-                color.green,
-                color.blue,
-                1202
+            cursor.execute(
+                query,
+                (
+                    "on",
+                    color.red,
+                    color.green,
+                    color.blue,
+                    1202
+                )
             )
-        )
 
-        db.conn.commit()
+            db.conn.commit()
 
-        if cursor.rowcount == 0:
+            if cursor.rowcount == 0:
+                return {
+                    "status": "error",
+                    "message": "No custom color record found with ID 1202"
+                }
+
             return {
-                "status": "error",
-                "message": "No custom color record found with ID 1202"
+                "status": "success",
+                "message": "Custom color updated and tree turned ON",
+                "rgb": {
+                    "red": color.red,
+                    "green": color.green,
+                    "blue": color.blue
+                }
             }
 
-        return {
-            "status": "success",
-            "message": "Custom color updated and tree turned ON",
-            "rgb": {
-                "red": color.red,
-                "green": color.green,
-                "blue": color.blue
-            }
-        }
-
-    except Exception as e:
-        db.conn.rollback()
-        raise HTTPException(status_code=500, detail=str(e))
-
-    finally:
-        cursor.close()
-        db.conn.close()
+        except Exception as e:
+            db.conn.rollback()
+            raise HTTPException(status_code=500, detail=str(e))
+    cursor.close()
+    db.conn.close()
 
 @router.get("/temp")
 def temp():
