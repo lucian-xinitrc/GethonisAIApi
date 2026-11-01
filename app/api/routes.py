@@ -104,7 +104,6 @@ def turn_tree_on(tree: ut.TreeUp):
     headers = tree.headers
     type = tree.type
     value = tree.value
-
     if headers == os.getenv("API_TREE_TOKEN"):
         db = Authentication()
         cursor = db.conn.cursor()
