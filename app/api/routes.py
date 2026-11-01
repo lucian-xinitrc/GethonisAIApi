@@ -126,7 +126,7 @@ def turn_tree_on(tree: ut.TreeUp):
             finally:
                 cursor.close()
                 db.conn.close()
-        elif type == "checkcustom":
+        if type == "checkcustom":
             try:
                 cursor.execute("SELECT * FROM customcolors")
                 rows = cursor.fetchall()
@@ -145,7 +145,7 @@ def turn_tree_on(tree: ut.TreeUp):
                 cursor.close()
                 db.conn.close()
 
-        elif type == "start":
+        if type == "start":
             try:
                 cursor.execute(
                     """
