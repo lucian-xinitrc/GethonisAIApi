@@ -13,7 +13,7 @@ class Message(BaseModel):
 
 class CustomColor(BaseModel):
 	headers: str
-    red: int = Field(ge=0, le=255)
+	red: int = Field(ge=0, le=255)
 	green: int = Field(ge=0, le=255)
 	blue: int = Field(ge=0, le=255)
 
@@ -130,13 +130,13 @@ def post_returning(token, type, message, choice):
 		Format:
 		{{
 		  "Post": {{
-		    "Title": "Title of Post",
-		    "paragraphs": [
-		      "Paragraph 1 (start strong, intro)",
-		      "Paragraph 2 (develop idea)",
-		      "Paragraph 3 (add insight or vision)"
-		    ],
-		    "Footer": "Footer"
+			"Title": "Title of Post",
+			"paragraphs": [
+			  "Paragraph 1 (start strong, intro)",
+			  "Paragraph 2 (develop idea)",
+			  "Paragraph 3 (add insight or vision)"
+			],
+			"Footer": "Footer"
 		  }}
 		}}
 		'''
