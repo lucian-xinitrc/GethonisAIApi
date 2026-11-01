@@ -104,7 +104,6 @@ def turn_tree_on(tree: ut.TreeUp):
 
     headers = tree.headers
     type = tree.type
-    value = tree.value
 
     if headers == "12021908":
         db = Authentication()
@@ -127,7 +126,7 @@ def turn_tree_on(tree: ut.TreeUp):
             finally:
                 cursor.close()
                 db.conn.close()
-        if type == "checkcustom":
+        elif type == "checkcustom":
             try:
                 cursor.execute("SELECT * FROM customcolors")
                 rows = cursor.fetchall()
