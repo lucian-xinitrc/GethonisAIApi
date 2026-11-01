@@ -101,12 +101,12 @@ def arduino(ardu: ut.ArduinoTemp):
 @router.post("/treeup")
 def turn_tree_on(tree: ut.TreeUp):
     load_dotenv()
-    
+
     headers = tree.headers
     type = tree.type
     value = tree.value
 
-    if headers == os.getenv("API_TREE_TOKEN"):
+    if headers == "12021908":
         db = Authentication()
         cursor = db.conn.cursor()
         if type == "check":
