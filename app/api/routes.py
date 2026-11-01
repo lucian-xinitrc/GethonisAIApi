@@ -114,6 +114,33 @@ def turn_tree_on(tree: ut.TreeUp):
                 cursor.execute("SELECT * FROM treeup")
                 rows = cursor.fetchall()
                 
+                query = """
+                    UPDATE treeup
+                    SET status = %s
+                    WHERE id = %s
+                """
+                
+                cursor.execute(query, ("off", 1202))
+                db.conn.commit()
+
+                return {"data": rows}
+            finally:
+                cursor.close()
+                db.conn.close()
+        if type == "checkcustom":
+            try:
+                cursor.execute("SELECT * FROM customcolors")
+                rows = cursor.fetchall()
+                
+                query_custom = """
+                    UPDATE customcolors
+                    SET status = %s
+                    WHERE id = %s
+                """
+
+                cursor.execute(query_custom, ("off", 1202))
+                db.conn.commit()
+
                 return {"data": rows}
             finally:
                 cursor.close()
@@ -138,47 +165,6 @@ def turn_tree_on(tree: ut.TreeUp):
                 db.conn.rollback()
                 return {"error": str(e)}
 
-        elif type == "stop":
-            try:
-                query = """
-                    UPDATE treeup
-                    SET status = %s
-                    WHERE id = %s
-                """
-                
-                cursor.execute(query, ("off", 1202))
-                
-                query_custom = """
-                    UPDATE customcolors
-                    SET status = %s
-                    WHERE id = %s
-                """
-
-                cursor.execute(query_custom, ("off", 1202))
-                db.conn.commit()
-
-                return {
-                    "status": "success",
-                    "message": "Tree turned OFF"
-                }
-
-            except Exception as e:
-                db.conn.rollback()
-                return {"status": "error", "message": str(e)}
-
-        cursor.close()
-        db.conn.close()
-
-@router.get("/treeupcustom")
-def get_treeupcustom():
-    db = Authentication()
-    cursor = db.conn.cursor()
-    try:
-        cursor.execute("SELECT * FROM treeup")
-        rows = cursor.fetchall()
-                
-        return {"data": rows}
-    finally:
         cursor.close()
         db.conn.close()
 
